@@ -182,7 +182,7 @@
       
         
         <li class="menu-item menu-item-fe">
-          <a href="/hero.me/" rel="section">
+          <a href="/hero.me/categories/fe" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -191,8 +191,18 @@
         </li>
       
         
+        <li class="menu-item menu-item-translation">
+          <a href="/hero.me/categories/translation" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-language"></i> <br>
+            
+            译文
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-travel">
-          <a href="/hero.me/travel" rel="section">
+          <a href="/hero.me/categories/travel" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-plane"></i> <br>
             
@@ -202,7 +212,7 @@
       
         
         <li class="menu-item menu-item-book">
-          <a href="/hero.me/book" rel="section">
+          <a href="/hero.me/categories/book" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
             
@@ -212,7 +222,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/hero.me/archives/" rel="section">
+          <a href="/hero.me/categories/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
@@ -222,7 +232,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/hero.me/about" rel="section">
+          <a href="/hero.me/categories/about" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
@@ -249,6 +259,223 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hero.me/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小南のblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/" itemprop="url">为什么在一些情况下WebAssembly比JavaScript更具有优势</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T14:07:38+08:00">
+                2019-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hero.me/categories/translation/" itemprop="url" rel="index">
+                    <span itemprop="name">translation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作者:Alexander Zlatkov | 译：汪楠<br>原文地址：[<a href="https://blog.sessionstack.com/how-javascript-works-a-comparison-with-webassembly-why-in-certain-cases-its-better-to-use-it-d80945172d79/]" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-a-comparison-with-webassembly-why-in-certain-cases-its-better-to-use-it-d80945172d79/]</a></p>
+<p>本文是探究<code>JavaScript</code>工作原理和构建组件文章的第六篇。在鉴定和描述核心内容过程中，我们同时分享了在开发<code>SessionStack</code>时候的一些经验。<code>SessionStack</code>其实是一款帮助用户实时查看和重现其Web应用缺陷的轻量级<code>JavaScript</code>应用程序。它拥有强大的功能和不错的性能表现。</p>
+<p>如果你错过了之前的文章，可以点击下面的链接：</p>
+<ul>
+<li>An overview of the engine, the runtime, and the call stack</li>
+<li>Inside Google’s V8 engine + 5 tips on how to write optimized code</li>
+<li>Memory management + how to handle 4 common memory leaks</li>
+<li>The event loop and the rise of Async programming + 5 ways to better coding with async/await</li>
+<li>Deep dive into WebSockets and HTTP/2 with SSE + how to pick the right path</li>
+</ul>
+<p>这次我们将拆分<code>webAssembly</code>来阐述其工作原理。重点则是对比<code>JavaScript</code>，分析它们在一些性能方面上的差异：加载时间，执行速度，垃圾回收，内存占用，平台API，调试，多线程和可移植性。</p>
+<p>我们开发web应用方式正处于变革的边缘，虽然现在来看还为时尚早，可是我们对于web应用的思考正在不断的发生改变。</p>
+<h1 id="首先，让我们看看WebAssembly是什么"><a href="#首先，让我们看看WebAssembly是什么" class="headerlink" title="首先，让我们看看WebAssembly是什么"></a>首先，让我们看看WebAssembly是什么</h1><p><code>WebAssembly</code>（又名wasm）是一个运行在网络浏览器中的高效的、低级别的字节码。<code>WASM</code>使得你可以使用JavaScript以外的语言（C,C++,Rust 等），用它们编写代码，然后提前编译成<code>WebAssembly</code>。</p>
+<p>这所带来的好处的就是可以非常快的加载和运行web程序。</p>
+<h1 id="加载时间"><a href="#加载时间" class="headerlink" title="加载时间"></a>加载时间</h1><p>为了去加载JavaScript，浏览器不得不去加载所有带“.js”后缀的文本文件。</p>
+<p><code>WebAssembly</code>在浏览器中加载更快，因为它只需要通过互联网传输已经编译完的<code>wasm</code>文件。 并且<code>wasm</code>是一个低级别的，非常紧凑的二进制格式的类汇编语言。</p>
+<h1 id="执行速度"><a href="#执行速度" class="headerlink" title="执行速度"></a>执行速度</h1><p>目前<code>Wasm</code>执行速度只比原生代码慢20%。这无疑是一个令人惊讶的结果。因为它是一种被编译在沙箱环境中的格式，并且运行在诸多限制条件下或者苛刻的条件下，以确保其安全性。与本地运行的代码相比慢了一些。重点是，可以预见它在未来将会更快。</p>
+<p>更具有优势的是，它与浏览器无关，所有浏览器引擎都增加了对<code>WebAssembly</code>的支持并且目前执行的时间也很类似。</p>
+<p>为了理解<code>WebAssembly</code>执行速度相比较<code>Javascript</code>有多快，你应该先阅读我们关于<code>Javascript</code>引擎是如何工作的那篇文章。</p>
+<p>让我们从下图直观看一下Javascript运行在V8引擎中发生什么事。</p>
+<img src="http://img11.360buyimg.com/uba/jfs/t16804/209/1074245115/32369/406c0c76/5abb0509Ne7c83bf5.png" width="250">
+
+<p>在图的左边，我们有一些JavaScript源码，包含了一些Javascript函数。首页需要被解析，将字符串转变为标记符号，然后生成抽象语法树（AST）。AST是你的JavaScrip代码在内存中逻辑表示。一旦生成AST表示，V8引擎可直接将其转成机器码。你基本只能按照这个树，生成机器码，然后执行你的函数。这样根本没有尝试使得它执行的更快。</p>
+<p>现在，看一下V8管道是如何做的：</p>
+<img src="http://img14.360buyimg.com/uba/jfs/t15856/279/2678048376/22864/ab67d883/5abb0509Ne6cd615e.png" width="250">
+
+<p>此刻我们有了<code>TurboFan</code>，一个V8优化编译器。当你的JavaScript应用正在运行，很多代码都执行在V8中。<code>TurboFan</code>可以监控某些代码是否执行过慢，是否存在瓶颈和关键点需要优化。它将推送他们到后台交给已优化的JIT处理，它是专门为优化那些耗CPU内存的代码函数准备。</p>
+<p>它解决了这个问题，但是也产生了另外的问题，在分析代码并且决定优化那些内容也同样消耗CPU。反过来说，这将意味需要消耗更多的电池能量，在移动设备上就更明显了。</p>
+<p>很明显，<code>wasm</code>并不需要这么多操作，它可以被插入到工作流中像下图这样。</p>
+<img src="http://img11.360buyimg.com/uba/jfs/t16717/258/1119106469/27472/1db72da3/5abb0509N51a8f2fc.png" width="250">
+
+<p><code>Wasm</code>已经在编译阶段进行了优化。最重要的是解析也不需要了。你已经有一份优化完的二进制代码可以直接输入到后台生成机器码。所有优化工作都已经在前台编译器中完成。</p>
+<p>这样<code>wasm</code>可以在运行时候跳过工作流中的一些步骤，使得执行更加高效。</p>
+<h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><img src="http://img10.360buyimg.com/uba/jfs/t17038/205/1037656294/55091/faf0b9e1/5abb0509Nb40723f1.png" width="250">
+
+<p>例如，被编译成<code>WebAssembly</code>的C++程序在内存中是连续的，没有“漏洞”的。<code>Wasm</code>的一大特征就是使得执行堆栈和线性内存相分离，这样有助于提高代码安全性。在C++编程中，你有一个堆栈，从底部分配栈，从顶部堆栈。这样，也许你也可以利用一个指针在堆栈内存中查找到一些你不应该访问到的变量。</p>
+<p>这是很多恶意软件惯用的手段。</p>
+<p><code>WebAssembly</code>采用完全不同的模型。执行堆栈和<code>WebAssembly</code>程序本身是分离的，所以你根本没机会在内存里改变它和改变变量之类的。而且，这些函数使用整数偏移而非指针。函数指向一个间接函数表。使用这些计算数字直接跳到模块中对应的函数中。它是以这种方式并排的加载多个<code>wasm</code>模块，并且不采用指针索引，功能同样也能正常运转。</p>
+<p>想要更多关于内存模型信息和如何在JavaScript中管理，你可以点击post on topic这篇文章。</p>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><p>你肯定对JavaScript的内存管理是用垃圾回收器集中处理的有所了解。<code>WebAssembly</code>的情况略有不同。它支持编写代码管理内存。你可以将自己写的<code>GC</code>和<code>wasm</code>模块打包在一起。当然这会是一个很复杂的任务。</p>
+<p>目前，<code>WebAssembly</code>是围绕C++和RUST用例设计的。因为<code>wasm</code>是非常低级别的，它使得编程语言只是位于汇编语言之上一小步，因此非常容易编译它。C 能够使用标准的<code>malloc</code>，C++使用智能指针，Rust 则采用完全不同的模式（完全不同的领域）。这三门语言都不使用GC，它们不需要在运行时候跟踪内存的复杂的东西。<code>WebAssembly</code>很显然非常适合它们。</p>
+<p>另外，这些语言并不是100%为复杂的JavaScript事物而设计的，例如更改DOM。采用C++来编写完整的HTML应用是有些愚笨的。因为C++并不是为它而设计的一门语言。在大多数情况下，工程师们编写C++或者Rust 主要是为了<code>WebGL</code>或者高度优化的库（例如：需要大量数学计算）。</p>
+<p>在未来，<code>WebAssembly</code>会支持那些不带<code>GC</code>的语言。</p>
+<h1 id="平台API接入"><a href="#平台API接入" class="headerlink" title="平台API接入"></a>平台API接入</h1><p>依靠在运行时才执行JavaScript，JavaScript应用程序可以接入访问平台提供的特定的API。例如，你在浏览器中执行JavaScript代码，你会有一组Web API可供Web应用程序调用来控制web浏览器/设备功能像DOM、CSSOM、WebGL、IndexedDB、Web Audio API等。</p>
+<p>然而，<code>WebAssembly</code>模块还不支持任何平台的API。任何API都是由JavaScript来调用。如果你想在<code>WebAssembly</code>模块中调用平台特定的API，只能通过JavaScript调用才行。</p>
+<p>举个例子：如果你想使用<code>console.log</code>，你不得不使用JavaScript代替C++的代码。而调用JavaScript代码则会导致运行成本的增加。<br>这不会一直都是这样的，规范提出了在未来将为平台API提供<code>wasm</code>，使得你发布跟JavaScript没有任何关系的应用。</p>
+<h1 id="source-maps"><a href="#source-maps" class="headerlink" title="source maps"></a>source maps</h1><p>当你压缩JavaScript代码后，你需要一个可行的方法来调试它。这就是<code>source maps</code>用武之地。从基础上来讲，<code>source maps</code>是一种将组合和压缩文件与之前未操作状态映射的方法。当你构建生产环境代码时，压缩合并了你的JavaScript文件，也同时生产了一个<code>source maps</code>文件，它包含了所有源文件的信息。当你在生成的JavaScript中查询确定行和列的代码时候，在<code>source maps</code>中查找返回对应的原始位置。</p>
+<p><code>WebAssembly</code>目前不支持<code>source maps</code>，还有相关的规范，但相信很快会有。<br>当你在C++中设置断点，你将会在C++ 代码中看到中断而不是在<code>WebAssembly</code>中。至少，这是我们所期望的目标。</p>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><p>JavaScript虽然只能运行在单线程上。不过有方法利用事件循环和异步编程像在此篇文章详细描述的内容这样来实现多线程。<br>JavaScript也可以使用<code>Web Workers</code>，他们有一个非常具体的例子—任何CPU高速的运转都会阻塞UI主线程，可以通过Web Worker下线线程解决。可是，<code>Web Workers</code>并不能直接操作DOM。</p>
+<p><code>WebAssembly</code>并不支持多线程，但是很快应该可以支持这个。Wasm将来与本地线程非常类似（比如像C++ 线程）。拥有真实的线程在浏览器中会创造出很多新的机会。当然，同样也有可能打开了滥用线程的大门。</p>
+<h1 id="可移植性"><a href="#可移植性" class="headerlink" title="可移植性"></a>可移植性</h1><p>如今，JavaScript可以在任何地方运行，从浏览器到服务端甚至嵌入式系统中。<br><code>WebAssembly</code>从设计上就保证了安全性和可移植性，就像JavaScript一样，它将运行在任何支持wasm的环境中（任何浏览器）。<br><code>WebAssembly</code>与Java关于小程序的早期想要获取的目标是一致的。</p>
+<h1 id="在什么场景下使用WebAssembly更优于JavaScript呢？"><a href="#在什么场景下使用WebAssembly更优于JavaScript呢？" class="headerlink" title="在什么场景下使用WebAssembly更优于JavaScript呢？"></a>在什么场景下使用<code>WebAssembly</code>更优于<code>JavaScript</code>呢？</h1><p>在<code>WebAssembly</code>第一个版本中，主要关注于需要大量CPU计算（比如处理数学问题）。他想到能被大量使用的场景就是游戏—有非常多的像素点需要计算。你可以用C++或者Rust 编写你熟悉的<code>OpenGL</code>代码，并且将其编译成<code>wasm</code>。然后它就可以在浏览器中跑起来。</p>
+<p>可以点击这个看一下（在<code>firefox</code>中运行）<br><a href="http://s3.amazonaws.com/mozilla-games/tmp/2017-02-21-SunTemple/SunTemple.html。它是运行在虚幻引擎中。" target="_blank" rel="noopener">http://s3.amazonaws.com/mozilla-games/tmp/2017-02-21-SunTemple/SunTemple.html。它是运行在虚幻引擎中。</a></p>
+<p>另外比较有意义的事是使用<code>WebAssembly</code>（性能方面）实现一些处理CPU高密集工作的库。例如，某些图像处理。<br>在前面提到，<code>wasm</code>大多数处理提早在编译环节已经完成，因此在移动设备上可以减少其运行时候的所需要的电池能耗（很大程度上取决于引擎）。</p>
+<p>在未来，你可以使用<code>WASM</code>库实现功能，即使你并没有编写代码和编译他们。你可以在<code>NPM</code>中找到对应的项目和其使用方法。<br>对于DOM操作和平台API的使用，使用JavaScript是非常合适，因为它并不会增加额外的开销，并且有本地API可以供使用。</p>
+<p>在<code>SessionStack</code>中，我们不断的挑战JavaScript性能的边界，为了能够编写高度优化且高效的代码。我们提供的解决方案提供非凡的性能，所以不会降低客户本身的app的性能。将SessionStack集成到用户生产的Web应用或者网站后，它会开始记录任何内容：DOM的改变，用户交互，JavaScript异常，堆栈跟踪，失败的网络请求和调试数据。所有这些都将在生产环境中进行，但是不会影响产品的UX和性能。我们需要大量的优化代码和尽可能的异步操作。</p>
+<p>不单单只有这个库而已！当你重放用户的会话在<code>SessionStack</code>中，我们必须重现当时出问题的所有现场，并且必须重构整个状态，允许你可以在会话的时间线上来回切换。为了做到这一点，我们大量使用JavaScript提供的异步方案，因为目前还是缺少可以替代的办法。</p>
+<p>借助<code>WebAssembly</code>，我们可以将一些繁琐的处理和渲染转交给更合适的编程语言，并且将数据收集和DOM操作留给JavaScript来处理。<br>如果你想尝试使用一个<code>SessionStack</code>，你可以在开始时候免费使用。每个月计划将有1000个免费会话提供。</p>
+<img src="http://img20.360buyimg.com/uba/jfs/t18622/253/1086788209/116877/fa01d6cf/5abb050aNf5263976.png" width="250">
+
+<p>视频资源：<br><a href="https://www.youtube.com/watch?v=6v4E6oksar0" target="_blank" rel="noopener">https://www.youtube.com/watch?v=6v4E6oksar0</a><br><a href="https://www.youtube.com/watch?v=6Y3W94_8scw" target="_blank" rel="noopener">https://www.youtube.com/watch?v=6Y3W94_8scw</a></p>
+<h1 id="扩展阅读："><a href="#扩展阅读：" class="headerlink" title="扩展阅读："></a>扩展阅读：</h1><p>SessionStack:<a href="https://www.sessionstack.com/?utm_source=medium&amp;utm_medium=blog&amp;utm_content=Post-6-webassembly-intro" target="_blank" rel="noopener">https://www.sessionstack.com/?utm_source=medium&amp;utm_medium=blog&amp;utm_content=Post-6-webassembly-intro</a></p>
+<p>An overview of the engine, the runtime, and the call stack:<a href="https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf?source=collection_home---2------1----------------" target="_blank" rel="noopener">https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf?source=collection_home---2------1----------------</a></p>
+<p>Inside Google’s V8 engine + 5 tips on how to write optimized code:<a href="https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e?source=collection_home---2------2----------------" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e?source=collection_home---2------2----------------</a></p>
+<p>Memory management + how to handle 4 common memory leaks:<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec?source=collection_home---2------0----------------" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec?source=collection_home---2------0----------------</a></p>
+<p>The event loop and the rise of Async programming + 5 ways to better coding with async/await:<a href="https://blog.sessionstack.com/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with-2f077c4438b5" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with-2f077c4438b5</a></p>
+<p>Deep dive into WebSockets and HTTP/2 with SSE + how to pick the right path:<a href="https://blog.sessionstack.com/how-javascript-works-deep-dive-into-websockets-and-http-2-with-sse-how-to-pick-the-right-path-584e6b8e3bf7?source=collection_home---4------0----------------" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-deep-dive-into-websockets-and-http-2-with-sse-how-to-pick-the-right-path-584e6b8e3bf7?source=collection_home---4------0----------------</a></p>
+<p>our article on how the JavaScript engine:<a href="https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e?source=---------3----------------" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e?source=---------3----------------</a></p>
+<p>AST:<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Abstract_syntax_tree</a></p>
+<p>post on the topic:<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a></p>
+<p>Web APIs:<a href="https://developer.mozilla.org/en-US/docs/Web/API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API</a></p>
+<p>DOM:<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model</a></p>
+<p>CSSOM:<a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model</a></p>
+<p>WebGL:<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API</a></p>
+<p>IndexedDB:<a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API</a></p>
+<p>Web Audio API:<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -522,9 +749,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/hero.me/archives/">
+                <a href="/hero.me/categories/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +762,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -546,7 +773,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
