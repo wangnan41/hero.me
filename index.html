@@ -1,1 +1,1033 @@
-<!DOCTYPE html><html class="theme-next mist use-motion" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/hero.me/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/hero.me/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/hero.me/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/hero.me/images/apple-touch-icon-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/hero.me/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/hero.me/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/hero.me/images/logo.svg?v=5.1.4" color="#222"><meta name="keywords" content="vue,react,webpack,小程序,react-native"><meta name="description" content="前端开发文艺工作者"><meta name="keywords" content="vue,react,webpack,小程序,react,native"><meta property="og:type" content="website"><meta property="og:title" content="小南のblog"><meta property="og:url" content="https://wangnan41.github.io/index.html"><meta property="og:site_name" content="小南のblog"><meta property="og:description" content="前端开发文艺工作者"><meta property="og:locale" content="zh-Hans"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="小南のblog"><meta name="twitter:description" content="前端开发文艺工作者"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/hero.me/",scheme:"Mist",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://wangnan41.github.io/"><title>小南のblog</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-home"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/hero.me/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">小南のblog</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle" style="display:inline-block;margin:0;padding:0">桃李春风一杯酒，江湖夜雨十年灯</p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-fe"><a href="/hero.me/categories/fe" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 前端笔记</a></li><li class="menu-item menu-item-translation"><a href="/hero.me/categories/translation" rel="section"><i class="menu-item-icon fa fa-fw fa-language"></i><br> 译文</a></li><li class="menu-item menu-item-travel"><a href="/hero.me/categories/travel" rel="section"><i class="menu-item-icon fa fa-fw fa-plane"></i><br> 旅行</a></li><li class="menu-item menu-item-book"><a href="/hero.me/categories/book" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i><br> 读书笔记</a></li><li class="menu-item menu-item-archives"><a href="/hero.me/categories/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-about"><a href="/hero.me/categories/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li></ul></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><section id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="小南"><meta itemprop="description" content><meta itemprop="image" content="/hero.me/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="小南のblog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/" itemprop="url">为什么在一些情况下WebAssembly比JavaScript更具有优势</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T14:07:38+08:00">2019-06-26</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/hero.me/categories/translation/" itemprop="url" rel="index"><span itemprop="name">translation</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"> 作者:Alexander Zlatkov | 译：汪楠原文地址：[https://blog.sessionstack.com/how-javascript-works-a-comparison-with-webassembly-why-in-certain-cases-its-better-to-use-it-d80945172d79/] 本文是探究JavaScript工作原理和构建组件文章的第六篇。在鉴定和描述核心内容过程中，我们同时分享了在开发SessionStack时候的一些经验。SessionStack其实是一款帮助用户实时查看和重现其Web应用缺陷的轻量级JavaScript应用程序。它拥有强大的功能和不错的性能表现。 如果你错过了之前的文章，可以点击下面的链接： An over ...<div class="post-button text-center"> <a class="btn" href="/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/#more" rel="contents">阅读全文 &raquo;</a></div></div><footer class="post-footer"><div class="post-eof"></div></footer></div></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/06/26/Gaea：简易好用的Vue技术栈单页面构建工具/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="小南"><meta itemprop="description" content><meta itemprop="image" content="/hero.me/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="小南のblog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/hero.me/2019/06/26/Gaea：简易好用的Vue技术栈单页面构建工具/" itemprop="url">Gaea：简易好用的Vue技术栈单页面构建工具</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T11:39:58+08:00">2019-06-26</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/hero.me/categories/fe/" itemprop="url" rel="index"><span itemprop="name">fe</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"> 简介：想了解我们最新开发Vue技术栈的构建工具 Gaea4.0 吗？它拥有许多新的特性：Webpack4、Babel7、京东特色的 Vue 组件库 NutUI2.0 等等。 前言我们团队在最近两年慢慢从PC端转移到移动端，技术栈从 JQuery、zepto 等DOM操作转移到 Vue、React 等新的技术栈。曾经部门的构建工具 JDF 已经慢慢退出舞台，现在对于新的技术栈需要新的构建工具 Butler 和 Gaea4.0。本文主要介绍Gaea4.0，它依然需要秉承 JDF 的定位，力求解决部门团队减少配置开发环境的工作量，做到开箱即用。又可以做到自定义配置，方便开发者根据实际情况插件式的配置开发环境。包含从开发、调试、上线整个流程的功能。下面将全面的介绍一下 Gaea4.0 构建工具。 ...<div class="post-button text-center"> <a class="btn" href="/hero.me/2019/06/26/Gaea：简易好用的Vue技术栈单页面构建工具/#more" rel="contents">阅读全文 &raquo;</a></div></div><footer class="post-footer"><div class="post-eof"></div></footer></div></article></section></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><section class="site-overview-wrap sidebar-panel sidebar-panel-active"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/hero.me/images/avatar.jpg" alt="小南"><p class="site-author-name" itemprop="name">小南</p><p class="site-description motion-element" itemprop="description">前端开发文艺工作者</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/hero.me/categories/archives/"><span class="site-state-item-count">2</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <span class="site-state-item-count">2</span> <span class="site-state-item-name">分类</span></div><div class="site-state-item site-state-tags"> <span class="site-state-item-count">6</span> <span class="site-state-item-name">标签</span></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/wangnan41" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2019</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">小南</span></div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user"></i> 访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv"><i class="fa fa-eye"></i> 访问次数<span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/hero.me/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/hero.me/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/hero.me/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/hero.me/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/hero.me/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/hero.me/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/hero.me/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/hero.me/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/hero.me/js/src/bootstrap.js?v=5.1.4"></script></body></html>
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hero.me/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/hero.me/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/hero.me/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/hero.me/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/hero.me/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/hero.me/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/hero.me/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vue,react,webpack,小程序,react-native">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端开发文艺工作者">
+<meta name="keywords" content="vue,react,webpack,小程序,react,native">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小南のblog">
+<meta property="og:url" content="https://wangnan41.github.io/index.html">
+<meta property="og:site_name" content="小南のblog">
+<meta property="og:description" content="前端开发文艺工作者">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小南のblog">
+<meta name="twitter:description" content="前端开发文艺工作者">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hero.me/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangnan41.github.io/">
+
+
+
+
+
+  <title>小南のblog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hero.me/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小南のblog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle" style="display:inline-block;margin:0;padding:0;">桃李春风一杯酒，江湖夜雨十年灯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/hero.me/categories/fe" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            前端笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-translation">
+          <a href="/hero.me/categories/translation" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-language"></i> <br>
+            
+            译文
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-travel">
+          <a href="/hero.me/categories/travel" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-plane"></i> <br>
+            
+            旅行
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-book">
+          <a href="/hero.me/categories/book" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            读书笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hero.me/categories/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/hero.me/categories/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/07/01/Webpack打包实用优化方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hero.me/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小南のblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/hero.me/2019/07/01/Webpack打包实用优化方案/" itemprop="url">Webpack打包实用优化方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T21:03:30+08:00">
+                2019-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hero.me/categories/fe/" itemprop="url" rel="index">
+                    <span itemprop="name">fe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          简介: Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。目前最火的打包工具莫过于 Webpack 了，关于 Webpack 的优化方案，网上有很多文章可以供大家参考。查阅前人的资料，总结自己在项目中遇到的问题，最终得出一些比较实用的优化方案，本文将与大家一一分享。既然是打包优化，那么我们需要时刻关注以下几点：
+
+减少编译时间
+减少编译输出文件大小
+提高页面性能
+
+Webpack3.0 的 Scope Hoisting (作用域提升)Webpack3.0 最大的一个新功能就是 Scope Hoisting （作用域提升）。曾经的 Webpack 是将每一个模块（每一个被 import 或者 requir
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/hero.me/2019/07/01/Webpack打包实用优化方案/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hero.me/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小南のblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/" itemprop="url">为什么在一些情况下WebAssembly比JavaScript更具有优势</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T14:07:38+08:00">
+                2019-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hero.me/categories/translation/" itemprop="url" rel="index">
+                    <span itemprop="name">translation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          作者:Alexander Zlatkov | 译：汪楠原文地址：[https://blog.sessionstack.com/how-javascript-works-a-comparison-with-webassembly-why-in-certain-cases-its-better-to-use-it-d80945172d79/]
+本文是探究JavaScript工作原理和构建组件文章的第六篇。在鉴定和描述核心内容过程中，我们同时分享了在开发SessionStack时候的一些经验。SessionStack其实是一款帮助用户实时查看和重现其Web应用缺陷的轻量级JavaScript应用程序。它拥有强大的功能和不错的性能表现。
+如果你错过了之前的文章，可以点击下面的链接：
+
+An over
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/06/26/Gaea：简易好用的Vue技术栈单页面构建工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hero.me/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小南のblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/hero.me/2019/06/26/Gaea：简易好用的Vue技术栈单页面构建工具/" itemprop="url">Gaea：简易好用的Vue技术栈单页面构建工具</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T11:39:58+08:00">
+                2019-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hero.me/categories/fe/" itemprop="url" rel="index">
+                    <span itemprop="name">fe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+简介：想了解我们最新开发Vue技术栈的构建工具 Gaea4.0 吗？它拥有许多新的特性：Webpack4、Babel7、京东特色的 Vue 组件库 NutUI2.0 等等。
+
+前言我们团队在最近两年慢慢从PC端转移到移动端，技术栈从 JQuery、zepto 等DOM操作转移到 Vue、React 等新的技术栈。曾经部门的构建工具 JDF 已经慢慢退出舞台，现在对于新的技术栈需要新的构建工具 Butler 和 Gaea4.0。本文主要介绍Gaea4.0，它依然需要秉承 JDF 的定位，力求解决部门团队减少配置开发环境的工作量，做到开箱即用。又可以做到自定义配置，方便开发者根据实际情况插件式的配置开发环境。包含从开发、调试、上线整个流程的功能。下面将全面的介绍一下 Gaea4.0 构建工具。
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/hero.me/2019/06/26/Gaea：简易好用的Vue技术栈单页面构建工具/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/hero.me/images/avatar.jpg" alt="小南">
+            
+              <p class="site-author-name" itemprop="name">小南</p>
+              <p class="site-description motion-element" itemprop="description">前端开发文艺工作者</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/hero.me/categories/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangnan41" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小南</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      访问次数<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/hero.me/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

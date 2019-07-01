@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hero.me/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/hero.me/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/hero.me/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/hero.me/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/hero.me/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/hero.me/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/hero.me/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,vue,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介: Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。目前最火的打包工具莫过于 Webpack 了，关于 Webpack 的优化方案，网上有很多文章可以供大家参考。查阅前人的资料，总结自己在项目中遇到的问题，最终得出一些比较实用的优化方案，本文将与大家一一分享。既然是打包优化，那么我们需要时刻关注以下几点">
+<meta name="keywords" content="webpack,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack打包实用优化方案">
+<meta property="og:url" content="https://wangnan41.github.io/2019/07/01/Webpack打包实用优化方案/index.html">
+<meta property="og:site_name" content="小南のblog">
+<meta property="og:description" content="简介: Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。目前最火的打包工具莫过于 Webpack 了，关于 Webpack 的优化方案，网上有很多文章可以供大家参考。查阅前人的资料，总结自己在项目中遇到的问题，最终得出一些比较实用的优化方案，本文将与大家一一分享。既然是打包优化，那么我们需要时刻关注以下几点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img14.360buyimg.com/uba/jfs/t19813/103/1136417137/71729/e6115fc2/5b1651ebNa772b49a.jpg">
+<meta property="og:image" content="http://img20.360buyimg.com/uba/jfs/t20593/53/712853791/272783/6d73539b/5b1652c7N32dbc218.jpg">
+<meta property="og:image" content="http://img12.360buyimg.com/uba/jfs/t21550/277/735652064/63914/a2417e89/5b165231N0fd97b21.jpg">
+<meta property="og:image" content="http://img20.360buyimg.com/uba/jfs/t21052/363/751826920/189366/32856e8b/5b1652e0N3b34e6d1.jpg">
+<meta property="og:image" content="http://img12.360buyimg.com/uba/jfs/t20380/336/705657242/329273/71167868/5b165328Nf8dfa56d.jpg">
+<meta property="og:image" content="http://img13.360buyimg.com/uba/jfs/t20368/302/712478610/199566/30035843/5b165ad5Nfc02c132.jpg">
+<meta property="og:image" content="http://img14.360buyimg.com/uba/jfs/t20617/12/736812907/120364/877f6e27/5b1665b0Nf0e26481.jpg">
+<meta property="og:image" content="http://img13.360buyimg.com/uba/jfs/t20794/191/721701067/147081/79c1ead5/5b16661bN89719c5c.jpg">
+<meta property="og:image" content="http://img11.360buyimg.com/uba/jfs/t21715/334/735840956/144136/ad072bee/5b16661dN5b0dd810.jpg">
+<meta property="og:image" content="http://img10.360buyimg.com/uba/jfs/t21577/57/718994465/322573/a098daa4/5b166660N99c0b0d1.jpg">
+<meta property="og:image" content="http://img11.360buyimg.com/uba/jfs/t21175/1/733999587/193561/85a64d60/5b1666f8N34c3f716.jpg">
+<meta property="og:image" content="http://img14.360buyimg.com/uba/jfs/t22192/295/751522277/198424/d7dae77a/5b16672cNa87b4080.jpg">
+<meta property="og:image" content="http://img10.360buyimg.com/uba/jfs/t19894/46/1152230345/192987/1268444a/5b166967Nb1a60f38.jpg">
+<meta property="og:image" content="http://img13.360buyimg.com/uba/jfs/t21229/160/713972814/189853/ad244d7e/5b166834N796e1f17.jpg">
+<meta property="og:image" content="http://img12.360buyimg.com/uba/jfs/t21037/39/750124658/1071991/cebe6d59/5b16699bN1d4d4b3d.jpg">
+<meta property="og:image" content="http://img30.360buyimg.com/uba/jfs/t20371/56/758322565/84300/cd2cc419/5b166ad3N54905d1a.jpg">
+<meta property="og:image" content="http://img20.360buyimg.com/uba/jfs/t21850/197/722220053/277331/284e712f/5b166b27Naa5f07ef.jpg">
+<meta property="og:image" content="http://img10.360buyimg.com/uba/jfs/t21985/19/728283776/90839/6552f5c6/5b166b78N5e225eb1.jpg">
+<meta property="og:image" content="http://img11.360buyimg.com/uba/jfs/t22381/162/757531011/30871/b1b17e56/5b166b80N5653be55.jpg">
+<meta property="og:image" content="http://img14.360buyimg.com/uba/jfs/t21859/333/725930307/108242/973b4f23/5b166c4aNac9af0cc.jpg">
+<meta property="og:image" content="http://img10.360buyimg.com/uba/jfs/t21985/19/728283776/90839/6552f5c6/5b166b78N5e225eb1.jpg">
+<meta property="og:updated_time" content="2019-07-01T13:04:31.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webpack打包实用优化方案">
+<meta name="twitter:description" content="简介: Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。目前最火的打包工具莫过于 Webpack 了，关于 Webpack 的优化方案，网上有很多文章可以供大家参考。查阅前人的资料，总结自己在项目中遇到的问题，最终得出一些比较实用的优化方案，本文将与大家一一分享。既然是打包优化，那么我们需要时刻关注以下几点">
+<meta name="twitter:image" content="http://img14.360buyimg.com/uba/jfs/t19813/103/1136417137/71729/e6115fc2/5b1651ebNa772b49a.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hero.me/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangnan41.github.io/2019/07/01/Webpack打包实用优化方案/">
+
+
+
+
+
+  <title>Webpack打包实用优化方案 | 小南のblog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hero.me/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小南のblog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle" style="display:inline-block;margin:0;padding:0;">桃李春风一杯酒，江湖夜雨十年灯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/hero.me/categories/fe" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            前端笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-translation">
+          <a href="/hero.me/categories/translation" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-language"></i> <br>
+            
+            译文
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-travel">
+          <a href="/hero.me/categories/travel" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-plane"></i> <br>
+            
+            旅行
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-book">
+          <a href="/hero.me/categories/book" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            读书笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hero.me/categories/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/hero.me/categories/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/07/01/Webpack打包实用优化方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hero.me/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小南のblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Webpack打包实用优化方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T21:03:30+08:00">
+                2019-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hero.me/categories/fe/" itemprop="url" rel="index">
+                    <span itemprop="name">fe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介-Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。"><a href="#简介-Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。" class="headerlink" title="简介: Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。"></a>简介: Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。</h2><p>目前最火的打包工具莫过于 <code>Webpack</code> 了，关于 <code>Webpack</code> 的优化方案，网上有很多文章可以供大家参考。查阅前人的资料，总结自己在项目中遇到的问题，最终得出一些比较实用的优化方案，本文将与大家一一分享。既然是打包优化，那么我们需要时刻关注以下几点：</p>
+<ul>
+<li>减少编译时间</li>
+<li>减少编译输出文件大小</li>
+<li>提高页面性能</li>
+</ul>
+<h2 id="Webpack3-0-的-Scope-Hoisting-作用域提升"><a href="#Webpack3-0-的-Scope-Hoisting-作用域提升" class="headerlink" title="Webpack3.0 的 Scope Hoisting (作用域提升)"></a>Webpack3.0 的 Scope Hoisting (作用域提升)</h2><p><code>Webpack3.0</code> 最大的一个新功能就是 <code>Scope Hoisting</code> （作用域提升）。曾经的 <code>Webpack</code> 是将每一个模块（每一个被 <code>import</code> 或者 <code>require</code> 的代码）<code>bundle</code> 到每一个独立的闭包函数里。这会导致 <code>bundle</code> 的文件里，每一个模块外层都会有一些特殊的闭包包装，导致文件增大，同时它也使得编译后的 js 文件在浏览器中的执行效率降低。</p>
+<p>虽然，理论知识已经了解，但我们还是用实际操作来验证一下：</p>
+<p>开启 <code>Scope Hoisting</code> 非常简单，因为 webpack 已经内置了这个功能，在插件入口处新增 new webpack.optimize.ModuleConcatenationPlugin()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins:[</span><br><span class="line">		new webpack.optimize.ModuleConcatenationPlugin()</span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
+
+<p>我们简单的编写两个文件 <code>app.js</code> 和 <code>timer.js</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import timer from &apos;./timer&apos;</span><br><span class="line"></span><br><span class="line">var time = (new Date()).getTime();</span><br><span class="line">timer();</span><br><span class="line">console.log(&apos;hello webpack&apos;+time);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export default function bar()&#123;</span><br><span class="line">	console.log(&apos;pig&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line">var webpack = require(&apos;webpack&apos;);</span><br><span class="line">var config = &#123;</span><br><span class="line">	entry:&#123;</span><br><span class="line">		app:&apos;./src/app.js&apos;</span><br><span class="line">	&#125;, </span><br><span class="line">	output:&#123;</span><br><span class="line">		filename:&apos;bundle.js&apos;,</span><br><span class="line">		path: path.resolve(__dirname,&apos;./build&apos;)</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:[</span><br><span class="line">		//new webpack.optimize.ModuleConcatenationPlugin()</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br><span class="line">module.exports = config;</span><br></pre></td></tr></table></figure>
+
+<p>执行编译后，结果如下：<code>bundle.js</code> 大小是3.03KB</p>
+<img src="http://img14.360buyimg.com/uba/jfs/t19813/103/1136417137/71729/e6115fc2/5b1651ebNa772b49a.jpg" width="320">
+
+<img src="http://img20.360buyimg.com/uba/jfs/t20593/53/712853791/272783/6d73539b/5b1652c7N32dbc218.jpg" width="320">
+
+<p>我们把 new webpack.optimize.ModuleConcatenationPlugin() 打开，编译结果如下：</p>
+<img src="http://img12.360buyimg.com/uba/jfs/t21550/277/735652064/63914/a2417e89/5b165231N0fd97b21.jpg" width="320">
+
+<img src="http://img20.360buyimg.com/uba/jfs/t21052/363/751826920/189366/32856e8b/5b1652e0N3b34e6d1.jpg" width="320">
+
+<p>对比两个的区别大家可以发现，在 <code>bundle.js</code> 中 <code>Webpack2.0</code> 比 <code>Webpack3.0</code> 多了以下的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function(module, __webpack_exports__, __webpack_require__) &#123;</span><br><span class="line">...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>timer.js</code> 和 <code>app.js</code> 都在一个函数中了，<code>timer.js</code> 并没有编译在闭包函数中。一个模块就少了一个闭包函数，那么多引用几个，就可以少很多了。从体积上的确可以看出明显减少。除了这一效果之外，这个内置优化能使得编译后的代码在浏览器中执行效率显著提高。在 Aaron Hardy 的 Optimizing Javascript Through Scope Hoisting[1]的文章中表明，在一个真实的 Tubine[2] 的项目中，作者对比了使用 <code>Scope Hoisting</code>  和不使用的打包大小和js在浏览器执行效率。<code>Turbine</code> 压缩的gzip文件大小减少了约41%，提高了初始化执行时间约12%。<br>看到这里，是不是很心动，如果能用在我们项目中，那很完美了。可惜现实比较残酷，下面我们看看它的局限性。<br>我将 demo 例子的引用模块改成 <code>CommonJs</code> 的语法，执行效果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//import bar from &apos;./timer&apos;</span><br><span class="line"></span><br><span class="line">var bar = require(&apos;./timer&apos;);</span><br><span class="line"></span><br><span class="line">var time = (new Date()).getTime();</span><br><span class="line">bar();</span><br><span class="line">console.log(&apos;hello webpack&apos;+time);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// export default function bar()&#123;</span><br><span class="line">// 	console.log(&apos;pig&apos;);</span><br><span class="line">// &#125;</span><br><span class="line"></span><br><span class="line">exports.bar = function()&#123;</span><br><span class="line">	console.log(&apos;big&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="http://img12.360buyimg.com/uba/jfs/t20380/336/705657242/329273/71167868/5b165328Nf8dfa56d.jpg" width="320">
+
+<p>你会发现用 <code>CommonJS</code> 的模块语法在开启 <code>Scope Hoisting</code> 时候，编译打包的 <code>bundle</code> 并没有发生改变。因为目前 <code>webpack3.0</code> 只支持 <code>ES Module</code> 的模块语法。联想一下，你在自己的脚手架中，大多的NPM依赖包都还是 <code>CommonJS</code> 的语法，<code>Webpack</code> 会回退到原打包模式。你在做升级处理的时候，可以使用 <code>--display-optimization-bailout</code> 查看被降级原因。</p>
+<img src="http://img13.360buyimg.com/uba/jfs/t20368/302/712478610/199566/30035843/5b165ad5Nfc02c132.jpg" width="320">
+
+<p>除了目前支持 <code>ES Modlue</code> 的语法外，也许你的老代码中还有以下几点：</p>
+<ul>
+<li>使用了ProvidePlugin[3]</li>
+<li>使用了eva()函数</li>
+<li>项目有多个entry</li>
+</ul>
+<p>就目前前端生态环境来看，<code>Webpack 3.0</code> 的 <code>Scope Hoisting</code> 的新特性暂时无法使用，不过 <code>ES Module</code>  是趋势，未来模块的引用的方式肯定被ES Module所取代。</p>
+<h2 id="CommonsChunkPlugin-的使用"><a href="#CommonsChunkPlugin-的使用" class="headerlink" title="CommonsChunkPlugin 的使用"></a>CommonsChunkPlugin 的使用</h2><p><code>Webpack3.0</code> 的 <code>Scope Hoisting</code> 在实际项目中用不了，那我们来看看 <code>CommonsChunkPlugin</code> 这个插件的使用。 <code>CommonChunkPlugin</code>  插件是一个可选的用于建立一个独立文件（又称作 <code>chunk</code> ）的功能，这个文件包含多个入口 <code>Chunk</code> 的公共模块（ <code>CommonsChunkPlugin</code> 已经从 <code>webpack v4 legato</code><br> 中移除了，想要了解最新版本中如何处理 chunk ，可以查看 <code>SplitChunksPlugin</code> [4]。<br><code>CommonsChunkPlugin</code> 优化的思路就是通过将公共模块拆出来，最终合成的文件能在最开始的是加载一次，便于后续访问其余页面，直接使用浏览器缓存中的公共代码，这样无疑体验会更好。<br>理论知识知道了，那么我们就动手来试试，是不是效果不错。我们搭一个基于 <code>Webpack2.7.0</code> 的简单的 <code>Vue</code> 脚手架：</p>
+<img src="http://img14.360buyimg.com/uba/jfs/t20617/12/736812907/120364/877f6e27/5b1665b0Nf0e26481.jpg" width="320">
+
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">const path = require('path');</span><br><span class="line">const webpack = require('webpack');</span><br><span class="line">const configw = require('./package.json');</span><br><span class="line">const HtmlWebpackPlugin = require('html-webpack-plugin');</span><br><span class="line">const ExtractTextPlugin = require('extract-text-webpack-plugin');</span><br><span class="line">const CleanWebpackPlugin = require('clean-webpack-plugin');</span><br><span class="line">const &#123; VueLoaderPlugin &#125; = require('vue-loader')</span><br><span class="line">var config = &#123;</span><br><span class="line">	entry:&#123;</span><br><span class="line">		app:'./src/app.js'</span><br><span class="line">	&#125;, </span><br><span class="line">	output:&#123;</span><br><span class="line">		path: path.resolve(__dirname, 'build'),</span><br><span class="line">	    publicPath: configw.publicPath + '/',</span><br><span class="line">	    filename: 'js/[name].[chunkhash].js'</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:[</span><br><span class="line">		new CleanWebpackPlugin('build'),</span><br><span class="line">		new HtmlWebpackPlugin(&#123;</span><br><span class="line">	        template: './src/index.html'</span><br><span class="line">	    &#125;),</span><br><span class="line">	    new ExtractTextPlugin(&#123;</span><br><span class="line">	        filename: 'css/app.css'</span><br><span class="line">	    &#125;),</span><br><span class="line"><span class="addition">+	    new webpack.optimize.CommonsChunkPlugin(&#123;</span></span><br><span class="line"><span class="addition">+	    	name:'vender',</span></span><br><span class="line"><span class="addition">+	    	minChunks: function(module) &#123;</span></span><br><span class="line"><span class="addition">+	        return (</span></span><br><span class="line"><span class="addition">+	          module.resource &amp;&amp;</span></span><br><span class="line"><span class="addition">+	          /\.js$/.test(module.resource) &amp;&amp;</span></span><br><span class="line"><span class="addition">+	          module.resource.indexOf(</span></span><br><span class="line"><span class="addition">+	            path.join(__dirname, './node_modules')</span></span><br><span class="line"><span class="addition">+	          ) === 0</span></span><br><span class="line"><span class="addition">+	        )</span></span><br><span class="line"><span class="addition">+	      &#125;</span></span><br><span class="line"><span class="addition">+</span></span><br><span class="line"><span class="addition">+	    &#125;),</span></span><br><span class="line">	    new VueLoaderPlugin(),</span><br><span class="line">	],</span><br><span class="line">	module:&#123;</span><br><span class="line">		rules: [</span><br><span class="line">				&#123;</span><br><span class="line">		        test: /\.css$/,</span><br><span class="line">		        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">		            fallback: "style-loader",</span><br><span class="line">		            use: ['css-loader']</span><br><span class="line">		        &#125;),</span><br><span class="line">		    &#125;,</span><br><span class="line">		    &#123;</span><br><span class="line">		        test: /\.scss$/,</span><br><span class="line">		        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">		            fallback: 'style-loader',</span><br><span class="line">		            use: ['css-loader', 'sass-loader']</span><br><span class="line">		        &#125;)</span><br><span class="line">		    &#125;,</span><br><span class="line">		    &#123;</span><br><span class="line">		        test: /\.vue$/,</span><br><span class="line">		        loader: 'vue-loader',</span><br><span class="line">		        options: &#123;</span><br><span class="line">		            </span><br><span class="line">		        &#125;</span><br><span class="line">		    &#125;,</span><br><span class="line">		    &#123;</span><br><span class="line">		        test: /\.js$/,</span><br><span class="line">		        loader: 'babel-loader',</span><br><span class="line">		        exclude: /node_modules/,</span><br><span class="line">		        query: &#123; </span><br><span class="line">		          presets: ['env']</span><br><span class="line">		        &#125;</span><br><span class="line">		      &#125;</span><br><span class="line">	     ]</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">module.exports = config;</span><br></pre></td></tr></table></figure>
+
+<p>为了方便查看，并没有引入压缩插件什么的做优化。目前来看，在业务js中的依赖于 <code>node_modules</code> 中的 <code>vue</code> 、<code>vue-router</code> 、<code>axios</code> 等第三方公共库都被抽离出 <code>app.js</code> 打包在 <code>vender.js</code> 中。为了能做到业务js和第三方库js 相分离，做到浏览器端缓存不会频繁更新的js迈出了第一步。可惜的是，如果我们改动业务代码比如，<code>app.js</code> 、<code>app.vue</code> 、<code>index.vue</code>等业务代码，你会发现除了 <code>app.js</code> 的哈希值发生了变化，连没有做更改的 <code>vender.js</code> 哈希值都变了。</p>
+<img src="http://img13.360buyimg.com/uba/jfs/t20794/191/721701067/147081/79c1ead5/5b16661bN89719c5c.jpg" width="320">
+
+<img src="http://img11.360buyimg.com/uba/jfs/t21715/334/735840956/144136/ad072bee/5b16661dN5b0dd810.jpg" width="320">
+
+<p>哈希值变了，就说明文件的内容变了。这一定会让你很奔溃，你想做到的 <code>Webpack</code> 构建持久化缓存 js 的功能基本是不可能的。找一下原因吧，没有更改依赖文件，为什么只改动业务 js，<code>vender.js</code> 也会变呢？因为每次构建时候，<code>Webpack</code> 会生成 <code>webpack runtime</code> 代码，用来帮助 <code>Webpack</code> 完成其工作，比如在模块交互时，链接模块所需的加载和解析逻辑。如下图所示，在我们的脚手架中，编译后的结果对比，就只有一个运行时产生的哈希值的值不一样。</p>
+<img src="http://img10.360buyimg.com/uba/jfs/t21577/57/718994465/322573/a098daa4/5b166660N99c0b0d1.jpg" width="320">
+
+<p>既然差别这么小，那么我们把 <code>runtime</code> 这部分代码抽离出来。这样就能持久化缓存 <code>vender.js</code> 了。我们试一下。</p>
+<figure class="highlight plain"><figcaption><span>+ manifest</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">	    	name:&apos;vender&apos;,</span><br><span class="line">	    	minChunks: function(module) &#123;</span><br><span class="line">	        return (</span><br><span class="line">	          module.resource &amp;&amp;</span><br><span class="line">	          /\.js$/.test(module.resource) &amp;&amp;</span><br><span class="line">	          module.resource.indexOf(</span><br><span class="line">	            path.join(__dirname, &apos;./node_modules&apos;)</span><br><span class="line">	          ) === 0</span><br><span class="line">	        )</span><br><span class="line">	      &#125;</span><br><span class="line">	    &#125;),</span><br><span class="line">	    new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">	    	name:&apos;manifest&apos;,</span><br><span class="line">	    	minChunks:Infinity</span><br><span class="line">	    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>修改了以下 <code>app.vue</code> 中的代码，前后的编译结果如下：</p>
+<img src="http://img11.360buyimg.com/uba/jfs/t21175/1/733999587/193561/85a64d60/5b1666f8N34c3f716.jpg" width="320">
+
+<img src="http://img14.360buyimg.com/uba/jfs/t22192/295/751522277/198424/d7dae77a/5b16672cNa87b4080.jpg" width="320">
+
+<p><code>vender.js</code> 的哈希值如预期一样，没有发生变化。因为文件内变化的代码已经被抽离出到 <code>manifest</code> 这个文件中了。<code>manifest</code> 里面存储了<code>chunks</code>映射关系，有了<code>chunks</code>的映射，我们才知道要加载的<code>chunk</code>的真实地址。那么每次修改业务 js，都不需要部署 <code>vender.js</code> 了。这样就达到了第三依赖库实现了用户端和服务端持久缓存。每次上线更新也就部署较小的 <code>app.js</code> 和 <code>manifest.js</code> 。不过需要注意的是 <code>manifest</code> 必须先加载。<br>那么直接在生产环境使用这种部署策略，不，还不行。我们的目标只有一个实现第三方库的在持久化缓存，但不能给我们的上线带来风险。要保证你不上线第三方库，用户直接访问本地浏览器缓存中的第三方库，即使上线更新业务 js 依然可以正常运行。<code>CommonsChunkPlugin</code> 这种打包方式是在运行时编译出的代码，如果我们在业务代码里新增或者删除依赖，试想一下，你项目采用此方式上线后，你对项目也许做优化或者功能模块增加，业务 js 中的对模块依赖部分的代码难免有变动。我们来对比一下保留 <code>index.vue</code> 中的依赖和删除依赖的结果：</p>
+<img src="http://img10.360buyimg.com/uba/jfs/t19894/46/1152230345/192987/1268444a/5b166967Nb1a60f38.jpg" width="320">
+
+<img src="http://img13.360buyimg.com/uba/jfs/t21229/160/713972814/189853/ad244d7e/5b166834N796e1f17.jpg" width="320">
+
+
+<p>很明显我修改了业务代码中的模块依赖，导致了 <code>vender.js</code> 库也发生了变化，这是没法避免的。因为 <code>vender.js</code> 和 <code>app.js</code> 是紧密耦合在一块的，你虽然把 <code>runtime</code> 的代码抽离到 <code>manifest</code> 中。对引入模块的删除和新增会导致在运行时编译的模块的id依赖发生变化。我对比了两个 <code>vender.js</code>  的区别，如下图所示，主要是引用的模块 id 发生了变化。</p>
+<img src="http://img12.360buyimg.com/uba/jfs/t21037/39/750124658/1071991/cebe6d59/5b16699bN1d4d4b3d.jpg" width="320">
+
+<p>看到这里，<code>CommonsChunkPlugin</code> 虽然能解决问题，但是上线风险无法避免。这样做是不值得，为了利用浏览器缓存，从而只上线 <code>app.js</code> 文件。很难保证上线无问题。最主要问题是，我们在 <code>build</code> 完提交测试还是把 <code>vender.js</code> 一并提交的。当然有人会说你看哈希值不就知道需不需要上线 <code>verder.js</code> 了。可是我上面提到的场景在业务代码中的修改还是很常见的，不值得再上线一次 <code>vender.js</code>。
+说了这么多，就是为了告诉我们都不行！ <code>vender.js</code> 实现持久化缓存。</p>
+<h2 id="DllPlugin-和-DllReferencePlugin"><a href="#DllPlugin-和-DllReferencePlugin" class="headerlink" title="DllPlugin 和 DllReferencePlugin"></a>DllPlugin 和 DllReferencePlugin</h2><p>这两个 <code>Webpack</code> 打包插件，<code>Dllplugin</code> 会打包出一个dll文件和一个 <code>manifest.json</code> 模块引用的映射文件。dll文件放什么呢，是我们的第三方库依赖。这样就好比是 Windows 的动态链接库。<code>Dllplugin</code> 的使用思路是将我们项目中的公共的第三方库打包到一个dll文件中。它是静态的，除非你手动修改在项目中需要引入的库。同时也会编译出一个<code>manifest.json</code> 的映射文件。它也是静态的，里面存储了通过id值映射值找到在dll文件中对应的库 js。<code>DllReferencePlugin</code> 则是将映射值打包进我们的业务 js 了。这样就可以完完全全的提前抽离了第三方依赖库。之后，只会打包编译业务部分的代码，再也不用去重复构建第三方库 js。构建编译的时间会大大减少。</p>
+<p>我们还是通过实践的方式来证明吧：</p>
+<p>首先我们配置一份生成dll的 <code>config</code> 。</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">const path = require("path");</span><br><span class="line">const webpack = require("webpack");</span><br><span class="line">const UglifyJsPlugin = require('uglifyjs-webpack-plugin');</span><br><span class="line">const config = require('./package.json');</span><br><span class="line">const curDate = new Date();</span><br><span class="line">const curTime = curDate.getFullYear() + '/' + (curDate.getMonth() + 1) + '/' + curDate.getDate() + ' ' + curDate.getHours() + ':' + curDate.getMinutes() + ':' + curDate.getSeconds()</span><br><span class="line">const bannerTxt = config.name + ' ' + config.version + ' ' + curTime;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	//你想要打包的模块数组</span><br><span class="line">	entry:&#123;</span><br><span class="line">		vendor:['vue','axios','vue-router','qs']</span><br><span class="line">	&#125;,</span><br><span class="line">	output:&#123;</span><br><span class="line">		path:path.join(__dirname,'/static/'),</span><br><span class="line">		filename:'[name].dll.js',</span><br><span class="line">		library:'[name]_library'</span><br><span class="line">		//vendor.dll.js 中暴露出的全局变量</span><br><span class="line">		//主要是给DllPlugin中的name 使用</span><br><span class="line">		//故这里需要和webpack.DllPlugin 中的 'name :[name]_libray 保持一致</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:[</span><br><span class="line"><span class="addition">+		new webpack.DllPlugin(&#123;</span></span><br><span class="line"><span class="addition">+			path:path.join(__dirname,'.','[name]-manifest.json'),</span></span><br><span class="line"><span class="addition">+			name:'[name]_library',</span></span><br><span class="line"><span class="addition">+			context:__dirname</span></span><br><span class="line"><span class="addition">+		&#125;),</span></span><br><span class="line">		new UglifyJsPlugin(&#123;</span><br><span class="line">            cache:true,</span><br><span class="line">            sourceMap:false,</span><br><span class="line">            parallel:4,</span><br><span class="line">            uglifyOptions: &#123;</span><br><span class="line">                ecma:8,</span><br><span class="line">                warnings:false,</span><br><span class="line">                compress:&#123;</span><br><span class="line">                    drop_console:true,</span><br><span class="line">                &#125;,</span><br><span class="line">                output:&#123;</span><br><span class="line">                    comments:false,</span><br><span class="line">                    beautify:false,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;),</span><br><span class="line">        new webpack.BannerPlugin(bannerTxt)</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>entry</code> 配置了常见的 <code>Vue</code> 全家桶系列。因为几乎每个页面都需要用到它们，把它们提到公共的 <code>vender.js</code>  中是再好不过的事了。我们看一下运行结果。我配置了 npm script 执行代码 npm run dll：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server -d --open --progress&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;cross-env NODE_ENV=production webpack --hide-modules --progress&quot;,</span><br><span class="line">    &quot;upload&quot;: &quot;cross-env NODE_ENV=upload webpack --hide-modules --progress&quot;,</span><br><span class="line">    &quot;dll&quot;: &quot;webpack --config ./webpack.dll.config.js&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<img src="http://img30.360buyimg.com/uba/jfs/t20371/56/758322565/84300/cd2cc419/5b166ad3N54905d1a.jpg" width="320">
+
+<p>压缩过的 <code>dll.js</code> 的大小还是可以接受的。我们看看生成的 <code>manifest.json</code> 里面都存储了什么。</p>
+<img src="http://img20.360buyimg.com/uba/jfs/t21850/197/722220053/277331/284e712f/5b166b27Naa5f07ef.jpg" width="320">
+
+<p>跟预期的一样，里面存储了引用映射路径和对应的id值。<code>dll.js</code> 和 <code>manifest.json</code> 只需要编译一次。之后我们开发业务代码和上线打包都不需要再次编译打包 <code>vender.dll.js</code> 了。我们看一下 <code>webpack.config.js</code> 中如何配置的。</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">const webpack = require('webpack');</span><br><span class="line">const config = require('./package.json');</span><br><span class="line">const path = require('path');</span><br><span class="line">const HtmlWebpackPlugin = require('html-webpack-plugin');</span><br><span class="line">const ExtractTextPlugin = require('extract-text-webpack-plugin');</span><br><span class="line">const CopyWebpackPlugin = require('copy-webpack-plugin');</span><br><span class="line">const CleanWebpackPlugin = require('clean-webpack-plugin');</span><br><span class="line">const UglifyJsPlugin = require('uglifyjs-webpack-plugin');</span><br><span class="line">const autoprefixer = require('autoprefixer');</span><br><span class="line">const htmlwebpackincludeassetsplugin = require('html-webpack-include-assets-plugin');</span><br><span class="line">const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');</span><br><span class="line"></span><br><span class="line">const webpackConfig = module.exports = &#123;&#125;;</span><br><span class="line">const isProduction = process.env.NODE_ENV <span class="comment">=== 'production';</span></span><br><span class="line">const isUpload = process.env.NODE_ENV <span class="comment">=== 'upload';</span></span><br><span class="line">const curDate = new Date();</span><br><span class="line">const curTime = curDate.getFullYear() + '/' + (curDate.getMonth() + 1) + '/' + curDate.getDate() + ' ' + curDate.getHours() + ':' + curDate.getMinutes() + ':' + curDate.getSeconds();</span><br><span class="line">const bannerTxt = config.name + ' ' + config.version + ' ' + curTime; //构建出的文件顶部banner(注释)内容</span><br><span class="line">webpackConfig.entry = &#123;</span><br><span class="line">    app: './src/app.js',</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">webpackConfig.output = &#123;</span><br><span class="line">    path: path.resolve(__dirname, 'build' + '/' + config.version),</span><br><span class="line">    publicPath: config.publicPath + '/'+config.version+'/',</span><br><span class="line">    filename: 'js/[name].js'</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">webpackConfig.module = &#123;</span><br><span class="line">    rules: [&#123;</span><br><span class="line">        test: /\.css$/,</span><br><span class="line">        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">            fallback: "style-loader",</span><br><span class="line">            use: ['css-loader', 'postcss-loader']</span><br><span class="line">        &#125;),</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        test: /\.scss$/,</span><br><span class="line">        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">            fallback: 'style-loader',</span><br><span class="line">            use: ['css-loader', 'sass-loader', 'postcss-loader']</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        test: /\.vue$/,</span><br><span class="line">        loader: 'vue-loader',</span><br><span class="line">        options: &#123;</span><br><span class="line">            extractCSS: true,</span><br><span class="line">            postcss: [require('autoprefixer')()]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        test: /\.js$/,</span><br><span class="line">        loader: 'babel-loader',</span><br><span class="line">        exclude: /node_modules/,</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        test: /\.(png|jpg|gif|webp)$/,</span><br><span class="line">        loader: 'url-loader',</span><br><span class="line">        options: &#123;</span><br><span class="line">            limit: 3000,</span><br><span class="line">            name: 'img/[name].[ext]',</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, ]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">webpackConfig.plugins = [</span><br><span class="line">    new webpack.optimize.ModuleConcatenationPlugin(),</span><br><span class="line">    new CleanWebpackPlugin('build'),</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">        template: './src/index.html'</span><br><span class="line">    &#125;),</span><br><span class="line">    new ExtractTextPlugin(&#123;</span><br><span class="line">        filename: 'css/app.css'</span><br><span class="line">    &#125;),</span><br><span class="line">    new CopyWebpackPlugin([</span><br><span class="line">        &#123; from: path.join(__dirname, "./static/"), to: path.join(__dirname, "./build/lib") &#125;</span><br><span class="line">    ]),</span><br><span class="line"><span class="addition">+    new webpack.DllReferencePlugin(&#123;</span></span><br><span class="line"><span class="addition">+        context:__dirname,</span></span><br><span class="line"><span class="addition">+        manifest:require('./vendor-manifest.json')</span></span><br><span class="line"><span class="addition">+    &#125;)</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">if (isProduction || isUpload) &#123;</span><br><span class="line"></span><br><span class="line">    webpackConfig.plugins = (webpackConfig.plugins || []).concat([</span><br><span class="line">        new webpack.DefinePlugin(&#123;</span><br><span class="line">            'process.env': &#123;</span><br><span class="line">                NODE_ENV: '"production"'</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;),</span><br><span class="line">        new webpack.LoaderOptionsPlugin(&#123;</span><br><span class="line">            minimize: true</span><br><span class="line">        &#125;),</span><br><span class="line">        new UglifyJsPlugin(&#123;</span><br><span class="line">            cache:true,</span><br><span class="line">            sourceMap:false,</span><br><span class="line">            parallel:4,</span><br><span class="line">            uglifyOptions: &#123;</span><br><span class="line">                ecma:8,</span><br><span class="line">                warnings:false,</span><br><span class="line">                compress:&#123;</span><br><span class="line">                    drop_console:true,</span><br><span class="line">                &#125;,</span><br><span class="line">                output:&#123;</span><br><span class="line">                    comments:false,</span><br><span class="line">                    beautify:false,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;),</span><br><span class="line">        new htmlwebpackincludeassetsplugin(&#123;</span><br><span class="line">            assets:['/lib/vendor.dll.js'],</span><br><span class="line">            publicPath:config.publicPath,</span><br><span class="line">            append:false</span><br><span class="line">            </span><br><span class="line">        &#125;),</span><br><span class="line">        new webpack.BannerPlugin(bannerTxt)</span><br><span class="line">    ]);</span><br><span class="line">   </span><br><span class="line">&#125; else &#123;</span><br><span class="line">    webpackConfig.output.publicPath = '/';</span><br><span class="line">    webpackConfig.devtool = '#cheap-module-eval-source-map';</span><br><span class="line">    webpackConfig.plugins = (webpackConfig.plugins || []).concat([</span><br><span class="line">         new AddAssetHtmlPlugin(&#123;</span><br><span class="line">            filepath:require.resolve('./static/vendor.dll.js'),</span><br><span class="line">            includeSourcemap:false,</span><br><span class="line">            </span><br><span class="line">        &#125;)</span><br><span class="line">    ]);</span><br><span class="line">    webpackConfig.devServer = &#123;</span><br><span class="line">        contentBase: path.resolve(__dirname, 'build'),</span><br><span class="line">        compress: true, //gzip压缩</span><br><span class="line">        historyApiFallback: true,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们用 <code>DllReferencePlugin</code> 把生成好的 <code>manifest.json</code> 映射文件引入到正式的业务代码打包中。</p>
+<img src="http://img10.360buyimg.com/uba/jfs/t21985/19/728283776/90839/6552f5c6/5b166b78N5e225eb1.jpg" width="320">
+
+<p><code>app.js</code> 只有7.45KB，<code>vender.dll.js</code> 被拷贝到 <code>build</code> 目录下 <code>lib</code> 文件夹下。</p>
+<img src="http://img11.360buyimg.com/uba/jfs/t22381/162/757531011/30871/b1b17e56/5b166b80N5653be55.jpg" width="320">
+
+<p>所有业务的代码则都在版本控制文件夹下，<code>vender.dll.js</code>  放置在 lib 文件夹下。每次上线如果有版本变化只要上线业务js就行。不需要上线 lib 文件夹。只要你不手动修改 <code>webpack.dll.config.js</code> 的entry</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">entry:&#123;</span><br><span class="line">		vendor:[&apos;vue&apos;,&apos;axios&apos;,&apos;vue-router&apos;,&apos;qs&apos;]</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就永远不会发生变化。<br>还是对比一样优化之前和优化之后的：</p>
+<img src="http://img14.360buyimg.com/uba/jfs/t21859/333/725930307/108242/973b4f23/5b166c4aNac9af0cc.jpg" width="320">
+
+<img src="http://img10.360buyimg.com/uba/jfs/t21985/19/728283776/90839/6552f5c6/5b166b78N5e225eb1.jpg" width="320">
+
+<p>优化之前 <code>app.js</code> 由于有打包了第三方库所以有116KB，优化之后，抽离第三库 <code>app.js</code> 只有7.45KB。只是项目开始时候，需要提前打包一份dll文件。以后每次编译时间都比之前少了将近一半。这个还只是一个脚手架demo。等到用在实际项目中的构建，效果更加明显。</p>
+<p>#总结</p>
+<p>有很多人不建议使用 <code>DllPlugin</code> ，觉得没必要把所有公共的打包在一起，放在首屏就加载，这样使得首屏加载时间过长之类的，还有觉得多了一份<code>config</code> 增加了工作量。不过我个人觉得，对于像 <code>React</code> 和 <code>Vue</code> 这种全家桶系列的，整体性偏强的技术栈。抽离出全家桶放置在 <code>vender.js</code> 中还是很有必要的。因为几乎每个页面都会用到。而且，他们是完全跟业务逻辑无关的第三方库。对它们实现持久化缓存，对于开发者和用户的体验都会大大提升。一点脚手架搭建的心得，感谢各位的浏览，有任何问题欢迎讨论哈～</p>
+<h2 id="扩展阅读："><a href="#扩展阅读：" class="headerlink" title="扩展阅读："></a>扩展阅读：</h2><p>[1]ptimizing Javascript Through Scope Hoisting:<a href="https://medium.com/launch-by-adobe/optimizing-javascript-through-scope-hoisting-47c132ef27e4" target="_blank" rel="noopener">https://medium.com/launch-by-adobe/optimizing-javascript-through-scope-hoisting-47c132ef27e4</a><br>[2]Tubine:<a href="https://github.com/Adobe-Marketing-Cloud/reactor-turbine" target="_blank" rel="noopener">https://github.com/Adobe-Marketing-Cloud/reactor-turbine</a><br>[3]ProvidePlugin:<a href="https://webpack.js.org/plugins/provide-plugin/" target="_blank" rel="noopener">https://webpack.js.org/plugins/provide-plugin/</a><br>[4]SplitChunksPlugin:<a href="https://webpack.js.org/plugins/split-chunks-plugin" target="_blank" rel="noopener">https://webpack.js.org/plugins/split-chunks-plugin</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hero.me/tags/webpack/" rel="tag"># webpack</a>
+          
+            <a href="/hero.me/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hero.me/2019/06/26/为什么在一些情况下WebAssembly比JavaScript更具有优势/" rel="next" title="为什么在一些情况下WebAssembly比JavaScript更具有优势">
+                <i class="fa fa-chevron-left"></i> 为什么在一些情况下WebAssembly比JavaScript更具有优势
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/hero.me/images/avatar.jpg" alt="小南">
+            
+              <p class="site-author-name" itemprop="name">小南</p>
+              <p class="site-description motion-element" itemprop="description">前端开发文艺工作者</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/hero.me/categories/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangnan41" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。"><span class="nav-number">1.</span> <span class="nav-text">简介: Webpack是当下最热门的前端资源模块化管理和打包工具。如何提升打包效率，成为了大家关注的点之一。下文将分享我们开发到上线的实用优化方案。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Webpack3-0-的-Scope-Hoisting-作用域提升"><span class="nav-number">2.</span> <span class="nav-text">Webpack3.0 的 Scope Hoisting (作用域提升)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CommonsChunkPlugin-的使用"><span class="nav-number">3.</span> <span class="nav-text">CommonsChunkPlugin 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DllPlugin-和-DllReferencePlugin"><span class="nav-number">4.</span> <span class="nav-text">DllPlugin 和 DllReferencePlugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展阅读："><span class="nav-number">5.</span> <span class="nav-text">扩展阅读：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小南</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      访问次数<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/hero.me/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hero.me/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/hero.me/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
