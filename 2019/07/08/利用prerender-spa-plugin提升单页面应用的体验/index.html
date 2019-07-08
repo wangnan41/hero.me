@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hero.me/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/hero.me/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/hero.me/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/hero.me/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/hero.me/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/hero.me/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/hero.me/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,vue,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目前 Vue、React 在前端界混的风生水起，它们的开发思想使得我们能真正做到前后端分离、解耦。单页面的使用给用户带来了更好体验。不过对于 Vue 和 React 这种框架来说，HTML in JS 的思路在首屏加载慢、白屏以及 SEO 等问题就日益突出了。 不仅需要拼框架的功能、生态，当然还不能忘记“用户至上的原理“，拼体验。孜孜不倦的前端朋友们给出了几个解决方案：1.Server-side">
+<meta name="keywords" content="webpack,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用prerender-spa-plugin提升单页面应用的体验">
+<meta property="og:url" content="https://wangnan41.github.io/2019/07/08/利用prerender-spa-plugin提升单页面应用的体验/index.html">
+<meta property="og:site_name" content="小南のblog">
+<meta property="og:description" content="目前 Vue、React 在前端界混的风生水起，它们的开发思想使得我们能真正做到前后端分离、解耦。单页面的使用给用户带来了更好体验。不过对于 Vue 和 React 这种框架来说，HTML in JS 的思路在首屏加载慢、白屏以及 SEO 等问题就日益突出了。 不仅需要拼框架的功能、生态，当然还不能忘记“用户至上的原理“，拼体验。孜孜不倦的前端朋友们给出了几个解决方案：1.Server-side">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img20.360buyimg.com/uba/jfs/t1/2629/26/105/12144/5b8f6f08Efa34770f/8a3b350966c50335.png">
+<meta property="og:image" content="http://img10.360buyimg.com/uba/jfs/t1/2175/24/636/15603/5b92270cE9eaa9c11/ece6cbda01397a83.jpg">
+<meta property="og:image" content="http://img10.360buyimg.com/uba/jfs/t1/2701/34/630/37704/5b92332aE3717fa17/8ad8c070f67e0a48.jpg">
+<meta property="og:image" content="http://img13.360buyimg.com/uba/jfs/t1/5395/27/1611/120060/5b9491c9Ec65037fb/adbcbce577c357c5.gif">
+<meta property="og:image" content="http://img10.360buyimg.com/uba/jfs/t1/4754/11/8674/1329268/5ba9db10E5a5f52b8/88a9988ec901c0c1.gif">
+<meta property="og:updated_time" content="2019-07-08T06:25:37.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用prerender-spa-plugin提升单页面应用的体验">
+<meta name="twitter:description" content="目前 Vue、React 在前端界混的风生水起，它们的开发思想使得我们能真正做到前后端分离、解耦。单页面的使用给用户带来了更好体验。不过对于 Vue 和 React 这种框架来说，HTML in JS 的思路在首屏加载慢、白屏以及 SEO 等问题就日益突出了。 不仅需要拼框架的功能、生态，当然还不能忘记“用户至上的原理“，拼体验。孜孜不倦的前端朋友们给出了几个解决方案：1.Server-side">
+<meta name="twitter:image" content="http://img20.360buyimg.com/uba/jfs/t1/2629/26/105/12144/5b8f6f08Efa34770f/8a3b350966c50335.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hero.me/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangnan41.github.io/2019/07/08/利用prerender-spa-plugin提升单页面应用的体验/">
+
+
+
+
+
+  <title>利用prerender-spa-plugin提升单页面应用的体验 | 小南のblog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hero.me/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小南のblog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle" style="display:inline-block;margin:0;padding:0;">桃李春风一杯酒，江湖夜雨十年灯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/hero.me/categories/fe" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            前端笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-translation">
+          <a href="/hero.me/categories/translation" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-language"></i> <br>
+            
+            译文
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-travel">
+          <a href="/hero.me/categories/travel" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-plane"></i> <br>
+            
+            旅行
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-book">
+          <a href="/hero.me/categories/book" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            读书笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hero.me/categories/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/hero.me/categories/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/07/08/利用prerender-spa-plugin提升单页面应用的体验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hero.me/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小南のblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用prerender-spa-plugin提升单页面应用的体验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T14:24:36+08:00">
+                2019-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hero.me/categories/fe/" itemprop="url" rel="index">
+                    <span itemprop="name">fe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目前 <code>Vue</code>、<code>React</code> 在前端界混的风生水起，它们的开发思想使得我们能真正做到前后端分离、解耦。单页面的使用给用户带来了更好体验。不过对于 <code>Vue</code> 和 React 这种框架来说，<code>HTML in JS</code> 的思路在首屏加载慢、白屏以及 <code>SEO</code> 等问题就日益突出了。</p>
+<p>不仅需要拼框架的功能、生态，当然还不能忘记“用户至上的原理“，拼体验。孜孜不倦的前端朋友们给出了几个解决方案：1.Server-side rendering（SSR），2.Prerendering。下面我将一一介绍一下。</p>
+<h1 id="什么是SSR？"><a href="#什么是SSR？" class="headerlink" title="什么是SSR？"></a>什么是SSR？</h1><p>SSR 直译就是服务端渲染，通过设置 <code>SSR</code>，你就可以在后台的 <code>Node.js</code> 环境中完成渲染逻辑，然后将 <code>HTML</code> 视图直接返回给客户端。这样你不仅可以使用 <code>Vue</code> 和 <code>React</code> 技术，而且可以直出页面内容。而非只有一个空壳子在后端那里。这样也方便了搜索引擎的蜘蛛获取页面，解决 <code>SEO</code> 问题。</p>
+<h1 id="SSR有什么问题？"><a href="#SSR有什么问题？" class="headerlink" title="SSR有什么问题？"></a>SSR有什么问题？</h1><p>你可以回想一下我们在很早之前的前端开发模式，其实就是后端直出页面。前端重构页面，交由后端套页面渲染首页的数据。当然一些异步的数据，则通过 <code>ajax</code> 获取数据渲染。这似乎又回到了之前的开发模式。前端和后端还是紧密联系在一起了。给维护和迭代带来的不便。</p>
+<p>那它没有好处吗？有的！目前，社会上还是有成熟的框架和线上的产品，比如 <code>Nuxt.js</code>[1]，<img src="http://img20.360buyimg.com/uba/jfs/t1/2629/26/105/12144/5b8f6f08Efa34770f/8a3b350966c50335.png" width="300"> ，<br>说明它还是具有价值的。它很明显可以解决首屏白屏或者SEO等问题。但是它也引入很多问题，其一，对工程师要求较高，需要同时掌握的前后端知识。其二，要考虑在服务端 <code>Node.js</code> 环境中的内存泄露、运行速度、并发压力等问题。node 层的服务可以用“脆弱”两个字来形容。其三，开发成本增加，研发周期变长等。一般来说，是需要一个强大且稳定的基础架构来支撑服务端的压力。</p>
+<p>如果你可以应付这些，无疑 <code>SSR</code> 对于增强应用体验是非常棒的~，但对于像我这样有点焦虑的人来说，是否有其他解决办法呢？有的， <code>Prerendering</code>！</p>
+<h1 id="Prerendering"><a href="#Prerendering" class="headerlink" title="Prerendering"></a>Prerendering</h1><p>有时候，我们开发的单页面应用也就几个页面，非常小型，仅仅是为了 <code>SEO</code>、首页白屏问题，大家都觉得有点校枉过正了。可以利用第三方插件 <code>prerender-spa-plugin</code>[2]，在客户端实现渲染，这样无需将 <code>Vue</code> 或者 <code>React</code> 代码部署在服务端。<code>prerender-spa-plugin</code> 是 <code>Webpack</code> 的插件，它可以编译应用中的所有静态页面，轻而易举的建立对应的索引路径。下面结合 <code>Vue.js</code> 和 <code>prerender-spa-plugin</code> 来解决前面所提出的的问题。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install prerender-spa-plugin --save-dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const PrerenderSPAPlugin = require(&apos;prerender-spa-plugin&apos;);</span><br><span class="line">const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">plugins: [</span><br><span class="line"> new PrerenderSPAPlugin(&#123;</span><br><span class="line">      staticDir: path.join(__dirname, &apos;dist&apos;),</span><br><span class="line">      routes: [ &apos;/&apos;, &apos;/about&apos;, &apos;/contact&apos; ],</span><br><span class="line">      renderer: new Renderer(&#123;</span><br><span class="line">        inject: &#123;</span><br><span class="line">          foo: &apos;bar&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        renderAfterDocumentEvent: &apos;render-event&apos;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  ])</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>staticDir</code> 指的是预渲染输出的页面地址，<code>routes</code> 指的是需要预渲染的路由地址，<code>renderer</code> 则是所采用的渲染引擎是什么，目前用的是 <code>V3.4.0</code> 版本支持 <code>PuppeteerRenderer</code>。<code>inject</code> 则是预渲染过程中都能拿到的值，该值提供给你了机会，让你觉得是否渲染这部分代码。例如下面的代码，是不会被预渲染进  <code>HTML</code> 中的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">showMessage()&#123;</span><br><span class="line">      if(window.__PRERENDER_INJECTED &amp;&amp; window.__PRERENDER_INJECTED.foo ==&apos;bar&apos;) return;</span><br><span class="line">      this.message = &apos;我是测试预加载拦截&apos;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p> <code>renderAfterDocumentEvent</code> 这个则很关键，这个是监听  <code>document.dispatchEvent</code> 事件，决定什么时候开始预渲染。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  router,</span><br><span class="line">  render: h =&gt; h(App),</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    // You&apos;ll need this for renderAfterDocumentEvent.</span><br><span class="line">    document.dispatchEvent(new Event(&apos;render-event&apos;))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>具体可以看一下官方的 <code>Vue.js 2.0 + vue-router Prerender SPA Example</code>[3] 实例。</p>
+<h2 id="原理及缺点"><a href="#原理及缺点" class="headerlink" title="原理及缺点"></a>原理及缺点</h2><p><code>prerender-spa-plugin</code> 利用了 <code>Puppeteer</code>[4] 的爬取页面的功能。<code>Puppeteer</code> 是一个 <code>Chrome</code> 官方出品的 <code>headless Chrome node</code> 库。它提供了一系列的 API, 可以在无 UI 的情况下调用 <code>Chrome</code> 的功能, 适用于爬虫、自动化处理等各种场景。它很强大，所以很简单就能将运行时的 <code>HTML</code> 打包到文件中。原理是在  <code>Webpack</code> 构建阶段的最后，在本地启动一个 <code>Puppeteer</code> 的服务，访问配置了预渲染的路由，然后将 puppeteer 中渲染的页面输出到 <code>HTML</code> 文件中，并建立路由对应的目录。</p>
+<img src="http://img10.360buyimg.com/uba/jfs/t1/2175/24/636/15603/5b92270cE9eaa9c11/ece6cbda01397a83.jpg" width="300">
+
+<p>利用官方的实例进行编译结果如下：<br><img src="http://img10.360buyimg.com/uba/jfs/t1/2701/34/630/37704/5b92332aE3717fa17/8ad8c070f67e0a48.jpg" width="300"><br>每个对应的路都有一个对应的静态 <code>HTML</code>。每一个 <code>HTML</code> 内除了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这个 <code>Vue</code> 的挂载元素外，还有静态的标签内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;PRODUCTION prerender-spa-plugin&lt;/title&gt;</span><br><span class="line">&lt;link rel=&quot;shortcut icon&quot; href=&quot;/favicon.ico&quot;&gt;&lt;style type=&quot;text/css&quot;&gt;&lt;/style&gt;&lt;style type=&quot;text/css&quot;&gt;#app&#123;font-family:Avenir,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50;margin-top:60px&#125;h1,h2&#123;font-weight:400&#125;ul&#123;list-style-type:none;padding:0&#125;li&#123;display:inline-block;margin:0 10px&#125;a&#123;color:#42b983&#125;&lt;/style&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;&lt;div&gt;&lt;img src=&quot;/logo.png?82b9c7a5a3f405032b1db71a25f67021&quot;&gt; &lt;h1&gt;Welcome to your prerender-spa-plugin Vuejs 2.0 demo app!&lt;/h1&gt; &lt;p&gt;汪楠大大about页&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;/&quot; class=&quot;router-link-active&quot;&gt;Home&lt;/a&gt; &lt;a href=&quot;/about&quot; class=&quot;router-link-exact-active router-link-active&quot;&gt;About&lt;/a&gt; &lt;a href=&quot;/contact&quot; class=&quot;&quot;&gt;Contact&lt;/a&gt;&lt;/p&gt; &lt;ul&gt;&lt;/ul&gt; &lt;a href=&quot;javascript:;&quot;&gt;点击我，看看有什么效果&lt;/a&gt; &lt;p&gt;最好不要点我&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;/build.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>既然有了每个路由对应的 <code>HTML</code>，那么对应 <code>SEO</code> 优化应该不成问题了。我们可以更改 <code>title</code> 、<code>meta</code> 。而且页面的内容都已经在 <code>HTML</code> 中直接呈现，就不会有因为 <code>js</code> 等资源加载慢导致白屏的问题。<br><code>prerender-spa-plugin</code> 的确在一定程度上解决了我们对于 <code>SEO</code> 的诉求和页面加载慢的问题。但是它的缺点还是很明显的。</p>
+<ul>
+<li>不同的用户看到不同的页面，动态数据页面</li>
+<li>经常发生变化的页面，数据实时性展示（比如体育比赛等）</li>
+<li>路由过多，构建时间过长</li>
+</ul>
+<h1 id="正确使用的姿势"><a href="#正确使用的姿势" class="headerlink" title="正确使用的姿势"></a>正确使用的姿势</h1><p>聊了这么多，大家都是为了给用户更好的体验。基本上我们做的页面都是强依赖动态数据展示，如果渲染的静态页面和最后呈现的页面之前切换并不自然，那么体验是很差的。我们不能为了解决 <code>SEO</code> 或者加载慢的问题，引入新的问题。那到底该怎么做呢？其实很简单：<code>Loading</code> 或者 骨架屏。这两个都是将过渡的 <code>HTML</code> 片段插入到 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code> 中。一旦js加载完，vue开始渲染正式页面时候，就将把过渡的 <code>HTML</code> 片段干掉了。看一下下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">body&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;&lt;div&gt;&lt;div class=&quot;j-loading-wrap&quot;&gt;&lt;div class=&quot;j-mask&quot;&gt;&lt;/div&gt; &lt;div class=&quot;j-loading&quot;&gt;&lt;img src=&quot;/joy_loading.gif?b494ac2f480615dc87d8797cb1a712da&quot;&gt;&lt;/div&gt;&lt;/div&gt; &lt;!----&gt;&lt;/div&gt;&lt;/div&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;/build.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="http://img13.360buyimg.com/uba/jfs/t1/5395/27/1611/120060/5b9491c9Ec65037fb/adbcbce577c357c5.gif" width="240">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;skeleton-loading &gt;</span><br><span class="line">    &lt;row </span><br><span class="line">        :gutter=&quot;&#123;</span><br><span class="line">            bottom: &apos;0.1rem&apos;</span><br><span class="line">        &#125;&quot;&gt;</span><br><span class="line">        &lt;column :span=&quot;&apos;24&apos;&quot;&gt;</span><br><span class="line">            &lt;square-skeleton </span><br><span class="line">                :boxProperties=&quot;&#123;</span><br><span class="line">                    height: &apos;0.3rem&apos;</span><br><span class="line">                &#125;&quot;    </span><br><span class="line">            /&gt;</span><br><span class="line">        &lt;/column&gt;</span><br><span class="line">    &lt;/row&gt;</span><br><span class="line">    &lt;row&gt;</span><br><span class="line">        &lt;square-skeleton </span><br><span class="line">            :boxProperties=&quot;&#123;</span><br><span class="line">                height: &apos;3.1rem&apos;</span><br><span class="line">            &#125;&quot;    </span><br><span class="line">        /&gt;</span><br><span class="line">    &lt;/row&gt;</span><br><span class="line">&lt;skeleton-loading &gt;</span><br></pre></td></tr></table></figure>
+
+<img src="http://img10.360buyimg.com/uba/jfs/t1/4754/11/8674/1329268/5ba9db10E5a5f52b8/88a9988ec901c0c1.gif" width="300">
+
+<p><code>Loading</code> 或者骨架屏只是为了增强用户体验，那么跟本文的主体有什么关系呢？有关系，一般在做过渡效果的时候，很多都是手写代码，这样既不利于维护，也不利于统一标准。我们可以使用 <code>prerender-spa-plugin</code> 进行操作，它能把整个页面都生成静态文件输出到 <code>HTML</code>，那么对于我们的 <code>Loading</code> 组件或者页面首屏的<code>DOM</code> 和样式自动化的输出到 <code>HTML</code> 中，不是轻而易举的事情吗？并且对于骨架屏来说，它只需要展示首屏的内容，所以我们可以利用插件的全局变量，进行判断，是否需要后续的抓取页面动作。这样也解决了骨架屏的体积大小问题。</p>
+<p>再则，<code>SEO</code>的问题对于目前开发的应用，很少有要求，基本都是入口页。但是用 <code>prerender-spa-plugin</code> 也可以完美的解决，生成 <code>Loading</code> 的多个路由页面或者骨架屏的多个路由页面，都可以由后端部署到 <code>vm</code> 模板中，编写对应的<code>title</code> 和<code>meta</code>，利用 <code>SEO</code> 的优化。</p>
+<p>以上是自动化抓取页面生成骨架屏，但目前还是处于研究阶段，目前我们在生产项目中用的仍然是手写的骨架屏组件，可以参考这个 <code>vue-skeleton-loading</code>[5] 组件。利用预渲染的插件将骨架屏 <code>Loading</code> 组件或者标准的 <code>Loading</code> 组件以 <code>DOM</code> 形式输出到部署生产的 <code>HTML</code> 页面中。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文罗列了单页面体验的痛点：首屏加载慢、白屏的问题以 <code>SEO</code>。也给出了渐进的解决方案利用预渲染 <code>prerender-spa-plugin</code> 的输出 <code>Vue</code> 或者 <code>React</code>公用组件（骨架屏组件和  <code>Loading</code> 组件）到各个路由页面 <code>HTML</code> 中。后续将依赖预渲染插件进行自动化骨架屏的输出方案，欢迎讨论和交流，敬请关注～</p>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p>[1] Nuxt.js：<a href="https://nuxtjs.org/guide" target="_blank" rel="noopener">https://nuxtjs.org/guide</a><br>[2] prerender-spa-plugin：<a href="https://github.com/chrisvfritz/prerender-spa-plugin" target="_blank" rel="noopener">https://github.com/chrisvfritz/prerender-spa-plugin</a><br>[3] vue2-webpack-router：<a href="https://github.com/chrisvfritz/prerender-spa-plugin/tree/dba55854a95a7a4e9b4aaf4203fb0563739bc58a/examples/vue2-webpack-router" target="_blank" rel="noopener">https://github.com/chrisvfritz/prerender-spa-plugin/tree/dba55854a95a7a4e9b4aaf4203fb0563739bc58a/examples/vue2-webpack-router</a><br>[4] puppeteer： <a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="noopener">https://github.com/GoogleChrome/puppeteer</a><br>[5] vue-skeleton-loading：<a href="https://github.com/jiingwang/vue-skeleton-loading" target="_blank" rel="noopener">https://github.com/jiingwang/vue-skeleton-loading</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hero.me/tags/webpack/" rel="tag"># webpack</a>
+          
+            <a href="/hero.me/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hero.me/2019/07/01/Webpack打包实用优化方案/" rel="next" title="Webpack打包实用优化方案">
+                <i class="fa fa-chevron-left"></i> Webpack打包实用优化方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/hero.me/images/avatar.jpg" alt="小南">
+            
+              <p class="site-author-name" itemprop="name">小南</p>
+              <p class="site-description motion-element" itemprop="description">前端开发文艺工作者</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/hero.me/categories/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangnan41" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是SSR？"><span class="nav-number">1.</span> <span class="nav-text">什么是SSR？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSR有什么问题？"><span class="nav-number">2.</span> <span class="nav-text">SSR有什么问题？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerendering"><span class="nav-number">3.</span> <span class="nav-text">Prerendering</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理及缺点"><span class="nav-number">3.4.</span> <span class="nav-text">原理及缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正确使用的姿势"><span class="nav-number">4.</span> <span class="nav-text">正确使用的姿势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展阅读"><span class="nav-number">6.</span> <span class="nav-text">扩展阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小南</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      访问次数<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/hero.me/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hero.me/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/hero.me/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
