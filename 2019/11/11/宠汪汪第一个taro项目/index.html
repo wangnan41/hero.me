@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hero.me/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/hero.me/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/hero.me/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/hero.me/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/hero.me/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/hero.me/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/hero.me/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="taro,小程序,h5,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="赶在双十一之前，我们利用Taro开发了一个h5和小程序多端的虚拟宠物养成游戏项目。下面简单的做一些总结和回顾～ 宠汪汪项目宠汪汪是一款落地于京东APP-我的 的一款轻量级虚拟宠物养成游戏，由我的京豆频道和京东数科来客有礼联合打造，集娱乐性+工具性于一体，独具匠心地嵌入了宠物赛跑玩法，是电商+小游戏的进化版本宠汪汪机智的系统将根据用户在京东的注册时间分配给他一只专属狗狗，用户可通过多种形式在宠汪汪完">
+<meta name="keywords" content="taro,小程序,h5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宠汪汪第一个taro项目">
+<meta property="og:url" content="https://wangnan41.github.io/2019/11/11/宠汪汪第一个taro项目/index.html">
+<meta property="og:site_name" content="小南のblog">
+<meta property="og:description" content="赶在双十一之前，我们利用Taro开发了一个h5和小程序多端的虚拟宠物养成游戏项目。下面简单的做一些总结和回顾～ 宠汪汪项目宠汪汪是一款落地于京东APP-我的 的一款轻量级虚拟宠物养成游戏，由我的京豆频道和京东数科来客有礼联合打造，集娱乐性+工具性于一体，独具匠心地嵌入了宠物赛跑玩法，是电商+小游戏的进化版本宠汪汪机智的系统将根据用户在京东的注册时间分配给他一只专属狗狗，用户可通过多种形式在宠汪汪完">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img10.360buyimg.com/imagetools/jfs/t1/44734/6/15493/59777/5dc8fe21E31d790f1/d35ad77bda257773.jpg">
+<meta property="og:image" content="https://img11.360buyimg.com/imagetools/jfs/t1/87306/7/2125/93780/5dc8fe22E7045e420/4c80745a13a3c9b4.jpg">
+<meta property="og:image" content="https://img13.360buyimg.com/imagetools/jfs/t1/75449/33/15303/122454/5dc8ff6fE8d4d51b7/de686cbf227fc5f9.jpg">
+<meta property="og:image" content="https://hsp.jdpay.com/?appid=46&filepath=/lottery_ui/taro_jd_dog/wx-jddog-icon-qr.png&auth=zs2PH+7i44Q4lvJN2efuZX7SjDhhPTQ2JmU9MTk3MjA3Nzk3NiZ0PTE1NzIwNzc5NzcmZj00N18xOTEwXzI1MTBfNDk1JnI9RnNzcnRHbHlRTQ==">
+<meta property="og:image" content="https://img14.360buyimg.com/imagetools/jfs/t1/73381/20/15080/27640/5dc913faE4cc42e86/82df8be367f0b5fa.jpg">
+<meta property="og:image" content="https://img11.360buyimg.com/imagetools/jfs/t1/49318/19/15685/255563/5dc91da5Eaea632ee/bffecfc0df75947e.jpg">
+<meta property="og:image" content="https://img10.360buyimg.com/imagetools/jfs/t1/62451/20/15146/16464/5dc91c5cE8468766f/3c03a8c29ebc7834.jpg">
+<meta property="og:image" content="https://img11.360buyimg.com/imagetools/jfs/t1/71308/31/15377/185036/5dc9225fEc4ad89c8/d0e489f2b974257a.jpg">
+<meta property="og:image" content="https://img10.360buyimg.com/imagetools/jfs/t1/101799/40/2099/89775/5dc9249cE0e1d3a4d/911d760edba98116.jpg">
+<meta property="og:updated_time" content="2019-11-11T09:28:37.264Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="宠汪汪第一个taro项目">
+<meta name="twitter:description" content="赶在双十一之前，我们利用Taro开发了一个h5和小程序多端的虚拟宠物养成游戏项目。下面简单的做一些总结和回顾～ 宠汪汪项目宠汪汪是一款落地于京东APP-我的 的一款轻量级虚拟宠物养成游戏，由我的京豆频道和京东数科来客有礼联合打造，集娱乐性+工具性于一体，独具匠心地嵌入了宠物赛跑玩法，是电商+小游戏的进化版本宠汪汪机智的系统将根据用户在京东的注册时间分配给他一只专属狗狗，用户可通过多种形式在宠汪汪完">
+<meta name="twitter:image" content="https://img10.360buyimg.com/imagetools/jfs/t1/44734/6/15493/59777/5dc8fe21E31d790f1/d35ad77bda257773.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hero.me/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangnan41.github.io/2019/11/11/宠汪汪第一个taro项目/">
+
+
+
+
+
+  <title>宠汪汪第一个taro项目 | 小南のblog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hero.me/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小南のblog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle" style="display:inline-block;margin:0;padding:0;">桃李春风一杯酒，江湖夜雨十年灯</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/hero.me/categories/fe" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            前端笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-translation">
+          <a href="/hero.me/categories/translation" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-language"></i> <br>
+            
+            译文
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-travel">
+          <a href="/hero.me/categories/travel" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-plane"></i> <br>
+            
+            旅行
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-book">
+          <a href="/hero.me/categories/book" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            读书笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hero.me/categories/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/hero.me/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangnan41.github.io/hero.me/2019/11/11/宠汪汪第一个taro项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hero.me/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小南のblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">宠汪汪第一个taro项目</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-11T10:05:05+08:00">
+                2019-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hero.me/categories/fe/" itemprop="url" rel="index">
+                    <span itemprop="name">fe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>赶在双十一之前，我们利用Taro开发了一个h5和小程序多端的虚拟宠物养成游戏项目。下面简单的做一些总结和回顾～</p>
+<h2 id="宠汪汪项目"><a href="#宠汪汪项目" class="headerlink" title="宠汪汪项目"></a>宠汪汪项目</h2><p>宠汪汪是一款落地于京东APP-我的 的一款轻量级虚拟宠物养成游戏，由我的京豆频道和京东数科来客有礼联合打造，<br>集娱乐性+工具性于一体，独具匠心地嵌入了宠物赛跑玩法，是电商+小游戏的进化版本宠汪汪机智的系统将根据用户在京东的注册时间分配给他一只专属狗狗，用户可通过多种形式在宠汪汪完成任务领取狗粮，对虚拟宠物进行喂养，宠物得到投喂后用户积分及宠物等级都会得到提升，还可用积分兑换实物奖励。<br>京东APP入口-我的，京豆-一起宠汪汪<br><img src="https://img10.360buyimg.com/imagetools/jfs/t1/44734/6/15493/59777/5dc8fe21E31d790f1/d35ad77bda257773.jpg" width="375px"><br><img src="https://img11.360buyimg.com/imagetools/jfs/t1/87306/7/2125/93780/5dc8fe22E7045e420/4c80745a13a3c9b4.jpg" width="375px"><br>小程序入口-来客有礼<br><img src="https://img13.360buyimg.com/imagetools/jfs/t1/75449/33/15303/122454/5dc8ff6fE8d4d51b7/de686cbf227fc5f9.jpg" width="375px"><br><img src="https://hsp.jdpay.com/?appid=46&filepath=/lottery_ui/taro_jd_dog/wx-jddog-icon-qr.png&auth=zs2PH+7i44Q4lvJN2efuZX7SjDhhPTQ2JmU9MTk3MjA3Nzk3NiZ0PTE1NzIwNzc5NzcmZj00N18xOTEwXzI1MTBfNDk1JnI9RnNzcnRHbHlRTQ==" width="375px"></p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p>业务需求需要我们同时在h5和小程序开发一套，既保证App端入口的功能，也要保证小程序端的功能，还要保证App端分享的小程序卡片引导用户进行社交分享，增加游戏体验、和用户参与度。为解决多端开发的问题，市面上有很多类似的开发框架，Vue.js规范的<a href="https://uniapp.dcloud.io/" target="_blank" rel="noopener">uni-app</a>、<a href="https://github.com/Meituan-Dianping/mpvue" target="_blank" rel="noopener">mpvue</a>、<a href="https://wepyjs.github.io/wepy-docs/" target="_blank" rel="noopener">wepy</a>，React.js规范的<a href="https://taro.aotu.io/home/in.html" target="_blank" rel="noopener">Taro</a>等等。<br>根据我们现有的微信原生小程序开发了来客有礼，此小程序目前有80左右的UV。宠汪汪项目相当于在来客有礼中开发一个新的页面，起初我们打算写两套，原生小程序一套，h5开发一套。但是这样子开发周期过长，无法保证我们在双十一之前上线，而且维护成本也很高。最后我们选择了Taro来解决这个问题，它可以一套代码，编译成两端运行。并且编译后的小程序代码可以很好的与原生小程序项目融合在一起。</p>
+<h3 id="Taro本地h5开发"><a href="#Taro本地h5开发" class="headerlink" title="Taro本地h5开发"></a>Taro本地h5开发</h3><p>首先按照官方文档，<code>npm install -g @tarojs/cli</code>，然后创建项目 <code>taro init jd_dog_web</code>。在 <code>app.jsx</code>中添加pages对应的开发的页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pages: [</span><br><span class="line">    &apos;pages/jdDog/jdDog&apos;,</span><br><span class="line">    &apos;pages/petRace/petRace&apos;,</span><br><span class="line">    &apos;pages/exchange/exchange&apos;,</span><br><span class="line">    &apos;pages/exchange/exchangeRecord&apos;,</span><br><span class="line">    &apos;pages/followShop/followShop&apos;</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<p>我们项目开发的目录如下：</p>
+<ul>
+<li>pages：业务页面</li>
+<li>components：模块组件</li>
+<li>common：公共方法</li>
+<li>assets：图片等静态资源<img src="https://img14.360buyimg.com/imagetools/jfs/t1/73381/20/15080/27640/5dc913faE4cc42e86/82df8be367f0b5fa.jpg" width="375px">
+通过`npm run dev:h5`进行本地重构开发，第一步已经成功，下面就是兼容原生小程序。
+<img src="https://img11.360buyimg.com/imagetools/jfs/t1/49318/19/15685/255563/5dc91da5Eaea632ee/bffecfc0df75947e.jpg" width="375px">
+
+</li>
+</ul>
+<h3 id="Taro与原生小程序融合"><a href="#Taro与原生小程序融合" class="headerlink" title="Taro与原生小程序融合"></a>Taro与原生小程序融合</h3><p>因为我们之前是使用原生小程序开发的项目，项目里面有很多公共的方法和模块，所以如何使得我们新开发的页面能够调用并且正常运行原小程序项目的代码成为关键。其实并没有想象那么复杂。<br><code>process.env.TARO_ENV === &#39;h5&#39;</code>是关键，其实我们在编译时候会选择是编译到h5还是weapp，所以Taro做了编译场景判断，如果是h5的话，不会包含特殊的小程序代码。比如，宠汪汪的项目需要登录，在app中登录，在小程序中也需要联合登录，联合登录使用的是小程序登录插件。当我们<code>npm run build:weapp</code>后，将代码复制到原小程序项目中<code>requirePlugin(&#39;loginPlugin&#39;)</code>可以直接获取到，并且正常调用小程序的联合登录插件。在场景值判断是在小程序中，正常引用原生小程序的一些公共方法是OK的。只不过调试部分稍微麻烦点，需要编译后小程序代码复制到小程序项目中，才能正常运营。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">loginJd(cb,isLoginOut)&#123;</span><br><span class="line">    //判断是h5 环境还是 小程序环境</span><br><span class="line">    if(process.env.TARO_ENV === &apos;h5&apos;)&#123;</span><br><span class="line">        if(isLoginOut)&#123;</span><br><span class="line">            //直接强制登录</span><br><span class="line">            ...</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        //判断是h5否已经登录京东账号</span><br><span class="line">        let url = ``</span><br><span class="line">        Taro.request(&#123;</span><br><span class="line">            url:url,</span><br><span class="line">            data:&#123;&#125;,</span><br><span class="line">            jsonp:true</span><br><span class="line">        &#125;).then((res)=&gt;&#123;</span><br><span class="line">            if(res.data &amp;&amp; res.data.islogin ==&apos;1&apos;)&#123;</span><br><span class="line">                console.log(&apos;已登录&apos;);</span><br><span class="line">                this.prepareH5()</span><br><span class="line">                cb &amp;&amp; cb(1);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                console.log(&apos;未登录&apos;);</span><br><span class="line">                cb &amp;&amp; cb(0);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        let plugin = requirePlugin(&apos;loginPlugin&apos;);</span><br><span class="line">        let ptKey = plugin.getStorageSync(&apos;jdlogin_pt_key&apos;);</span><br><span class="line">        if(isLoginOut)&#123;</span><br><span class="line">            if(ptKey)&#123;</span><br><span class="line">                plugin.logout(&#123;</span><br><span class="line">                    callback: ()=&gt; &#123;&#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            cb &amp;&amp; cb(&apos;&apos;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        cb &amp;&amp; cb(ptKey);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>说一说如何能把编译后的代码融合到原生小程序中，第一步就是在原生小程序项目中，添加对应的页面，因为不是首页，所以我们直接把页面放到分包中。注册页面后，我们还需把对应的编译完的页面放入到项目的pages中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&quot;subPackages&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;root&quot;: &quot;pages/followShop/&quot;,</span><br><span class="line">      &quot;pages&quot;: [</span><br><span class="line">        &quot;followShop&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;root&quot;: &quot;pages/jdDog/&quot;,</span><br><span class="line">      &quot;name&quot;: &quot;jdDog&quot;,</span><br><span class="line">      &quot;pages&quot;: [</span><br><span class="line">        &quot;jdDog&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;root&quot;: &quot;pages/exchange/&quot;,</span><br><span class="line">      &quot;pages&quot;: [</span><br><span class="line">        &quot;exchange&quot;,</span><br><span class="line">        &quot;exchangeRecord&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;root&quot;: &quot;pages/petRace/&quot;,</span><br><span class="line">      &quot;name&quot;: &quot;petRace&quot;,</span><br><span class="line">      &quot;pages&quot;: [</span><br><span class="line">        &quot;petRace&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>我们把如下图的编译后的代码直接pages文件移动到原生小程序的pages内，components内的移动到原生小程序的components内。其他的一些依赖的common等文件直接移动到原生项目的一级目录。这样子，在小程序内就可以跑起来了。<br><img src="https://img10.360buyimg.com/imagetools/jfs/t1/62451/20/15146/16464/5dc91c5cE8468766f/3c03a8c29ebc7834.jpg" width="375px"><br><img src="https://img11.360buyimg.com/imagetools/jfs/t1/71308/31/15377/185036/5dc9225fEc4ad89c8/d0e489f2b974257a.jpg" width="375px"></p>
+<h2 id="动画方案"><a href="#动画方案" class="headerlink" title="动画方案"></a>动画方案</h2><p>对应一个游戏类的项目，怎么能少了动画呢，对于动画部分，作为前端来说可谓是一大障碍，无论是用css还是js来实现动画，并不能很好的还原设计师的原稿，当然简单的一些动画效果可以利用CSS3实现。但是一些复杂的联动的效果是很难的。动效系数是决定页面动画效果是否自然的关键。所以还是将这部分交还给动效设计师吧。此次项目有动效设计师把持，给予了 <code>APNG</code> 的 <code>PNG</code> 动画图。比如吃饭、升级、倒狗粮、赛跑等难度大的动效果都由 <code>APNG</code> 图完成。很幸运的是APNG在移动端支持还是不错的。<br><img src="https://img10.360buyimg.com/imagetools/jfs/t1/101799/40/2099/89775/5dc9249cE0e1d3a4d/911d760edba98116.jpg" width="375px"><br>并且<code>APNG</code> 对比 <code>GIF</code> 由很多方面的优势</p>
+<ul>
+<li>GIF：<br>最多支持 8 位 256 色，色阶过渡糟糕，图片具有颗粒感<br>不支持 Alpha 透明通道，边缘有杂边</li>
+<li>APNG：<br>支持 24 位真彩色图片<br>支持 8 位 Alpha 透明通道<br>向下兼容 PNG<br>选择APNG动画开发动效减少很大的前端工作量。感谢给力的小王设计师～。</li>
+</ul>
+<h2 id="项目总结"><a href="#项目总结" class="headerlink" title="项目总结"></a>项目总结</h2><p>在11月1日当天10点项目正式上线，截止11月11日宠汪汪项目PV已经达到350万，UV达到28万，并且每天都在持续的增长。利用Taro解决了多端场景的痛点，当然项目中有些场景还是需要单独写h5和小程序的代码，以满足业务需求比如长图保存，打字动效果等等。整体来说，的确提高了开发效率，减少研发周期。同时也感谢Taro的技术团队的支持～。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hero.me/tags/taro/" rel="tag"># taro</a>
+          
+            <a href="/hero.me/tags/小程序/" rel="tag"># 小程序</a>
+          
+            <a href="/hero.me/tags/h5/" rel="tag"># h5</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hero.me/2019/07/22/SSL、TLS 如何使HTTPS变安全？/" rel="next" title="SSL、TLS如何使HTTPS变安全？">
+                <i class="fa fa-chevron-left"></i> SSL、TLS如何使HTTPS变安全？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/hero.me/images/avatar.jpg" alt="小南">
+            
+              <p class="site-author-name" itemprop="name">小南</p>
+              <p class="site-description motion-element" itemprop="description">前端开发文艺工作者</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/hero.me/categories/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangnan41" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangnan19900401@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#宠汪汪项目"><span class="nav-number">1.</span> <span class="nav-text">宠汪汪项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术选型"><span class="nav-number">2.</span> <span class="nav-text">技术选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Taro本地h5开发"><span class="nav-number">2.1.</span> <span class="nav-text">Taro本地h5开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Taro与原生小程序融合"><span class="nav-number">2.2.</span> <span class="nav-text">Taro与原生小程序融合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画方案"><span class="nav-number">3.</span> <span class="nav-text">动画方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目总结"><span class="nav-number">4.</span> <span class="nav-text">项目总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小南</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      访问次数<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hero.me/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/hero.me/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hero.me/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/hero.me/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hero.me/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
